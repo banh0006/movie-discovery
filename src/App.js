@@ -6,10 +6,29 @@ import Home from './components/pages/Home'
 import MovieDetails from './components/pages/MovieDetails'
 import LatestMovies from './components/pages/LatestMovies'
 import TrendingMovies from './components/pages/TrendingMovies'
+// import { BASE_URL, GENRE_URL, API_KEY } from './asset/GlobalData'
+// import axios from 'axios'
 
+// axios.defaults.baseURL = 'https://...'
 function App() {
   const [showNav, setShowNav] = useState(true)
   const [scrolledPosition, setSrolledPosition] = useState(0)
+
+  //#region get data online
+  // const getGenres = async() => {
+    
+  //   let url = BASE_URL + GENRE_URL + API_KEY
+  //   try {
+  //       axios.get(url)
+  //           .then(res => {
+  //           console.log(res.data.genres)
+  //       })
+  //   } catch (error) {
+        
+  //   }
+  // }
+  
+  //#endregion
 
   const handleScroll = () => {
     const currentPosition = window.pageYOffset
@@ -30,6 +49,10 @@ function App() {
       window.removeEventListener("scroll", handleScroll)
     }
   })
+
+  // useEffect(() => {
+  //   getGenres()
+  // }, [])
 
   return (
     <Router>

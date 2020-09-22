@@ -4,14 +4,61 @@ import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavLink, NavbarBrand,
 import '../../css/NavBar.css'
 import InputSearch from '../atoms/InputSearch'
 
+import { BASE_URL, GENRE_URL, API_KEY, COUNTRIES } from '../../asset/GlobalData'
+import axios from 'axios'
+
 export default function NavBar(props) {
+    const [genres, setGenres] = useState([])
+    const [genreDropdownItems, setGenreDropdownItems] = useState([])
+    const [countryDropdownItems, setCountryDropdownItems] = useState([])
+    const countries = COUNTRIES
+
     const [show, setShow] = useState({ ...props.showNav })
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
+    const [isOpen, setIsOpen] = useState(false)
+    const toggle = () => setIsOpen(!isOpen)
+
+    const getGenres = async() => {
+        let url = BASE_URL + GENRE_URL + API_KEY
+        try {
+            axios.get(url)
+                .then(res => {
+                    setGenres(res.data.genres)
+            })
+        } catch (error) {
+            
+        }
+    }
 
     useEffect(() => {
         setShow(props.showNav)
     }, [props.showNav])
+
+    useEffect(() => {
+        getGenres()
+        let items = []
+        countries.map((country, index) => {
+            items.push(
+                <DropdownItem key={index}>
+                    {country}
+                </DropdownItem>
+            )
+        })
+        setCountryDropdownItems(items)
+    }, [])
+
+    useEffect(() => {
+        if (genres.length > 0) {
+            let items = []
+            genres.map((genre, index) => {
+                items.push(
+                    <DropdownItem key={index}>
+                        {genre.name}
+                    </DropdownItem>
+                )
+            })
+            setGenreDropdownItems(items)
+        }
+    }, [genres])
 
     return (
         <Navbar fixed="top" color="dark" dark expand="md" className={ show ? 'nav-show' : 'nav-hide'}>
@@ -24,16 +71,7 @@ export default function NavBar(props) {
                             Genre
                         </DropdownToggle>
                         <DropdownMenu right>
-                        <DropdownItem>
-                            Genre 1
-                        </DropdownItem>
-                        <DropdownItem>
-                            Genre 2
-                        </DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>
-                            Genre 3
-                        </DropdownItem>
+                            { genreDropdownItems }
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <UncontrolledDropdown nav inNavbar>
@@ -41,16 +79,7 @@ export default function NavBar(props) {
                             Country
                         </DropdownToggle>
                         <DropdownMenu right>
-                        <DropdownItem>
-                            Country 1
-                        </DropdownItem>
-                        <DropdownItem>
-                            Country 2
-                        </DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>
-                            Country 3
-                        </DropdownItem>
+                           { countryDropdownItems }
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <NavItem>
