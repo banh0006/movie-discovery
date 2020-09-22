@@ -1,0 +1,34 @@
+.navbar {
+    min-height: 100px;
+}
+
+.input-search {
+    width: 100%;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show {
+    visibility: visible;
+    animation:  showNavBar 0.3s 1;
+}
+
+.hide {
+    visibility: hidden;
+    animation: hideNavBar 0.3s 1;
+    transition: visibility 0s 0.3s;
+}
+
+@keyframes showNavBar {
+    0%   {top: -50px;}
+    50%  {top: -25px;}
+    100% {top: 0px;}
+}
+
+@keyframes hideNavBar {
+    0%   {top: 0px; }
+    50%  {top: -25px; }
+    100% {top: -50px; }
+}
