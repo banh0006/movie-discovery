@@ -10,12 +10,12 @@
     align-items: center;
 }
 
-.show {
+.nav-show {
     visibility: visible;
     animation:  showNavBar 0.3s 1;
 }
 
-.hide {
+.nav-hide {
     visibility: hidden;
     animation: hideNavBar 0.3s 1;
     transition: visibility 0s 0.3s;

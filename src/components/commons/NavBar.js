@@ -14,7 +14,7 @@ export default function NavBar(props) {
     }, [props.showNav])
 
     return (
-        <Navbar fixed="top" color="dark" dark expand="md" className={ show ? 'show' : 'hide'}>
+        <Navbar fixed="top" color="dark" dark expand="md" className={ show ? 'nav-show' : 'nav-hide'}>
             <NavbarBrand href="/">Home</NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
