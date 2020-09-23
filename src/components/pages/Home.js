@@ -1,6 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+import { BASE_URL, NOW_PLAYING_URL, API_KEY } from '../../asset/GlobalData'
+import axios from 'axios'
 
 export default function Home() {
+    const [nowPlaying, setNowPlaying] = useState([])
+
+    const getNowPlayingMovies = async() => {
+        let url = BASE_URL + NOW_PLAYING_URL + API_KEY + "&page=1"
+        try {
+            axios.get(url)
+                .then(res => {
+                    setNowPlaying(res.data)
+            })
+
+        } catch (error) {
+            
+        }
+    }
+
+    useEffect(() => {
+        getNowPlayingMovies()
+    }, [])
+
+    useEffect(()=> {
+
+    }, [nowPlaying])
+
     return (
         <div>
             The standard Lorem Ipsum passage, used since the 1500s

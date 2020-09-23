@@ -3,12 +3,12 @@ import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavLink, NavbarBrand,
     UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap'
 import '../../css/NavBar.css'
 import InputSearch from '../atoms/InputSearch'
+import * as genreActions from '../../redux/actions/genreActions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { COUNTRIES } from '../../asset/GlobalData'
 
-import { BASE_URL, GENRE_URL, API_KEY, COUNTRIES } from '../../asset/GlobalData'
-import axios from 'axios'
-
-export default function NavBar(props) {
-    const [genres, setGenres] = useState([])
+export function NavBar(props) {
     const [genreDropdownItems, setGenreDropdownItems] = useState([])
     const [countryDropdownItems, setCountryDropdownItems] = useState([])
     const countries = COUNTRIES
@@ -17,24 +17,12 @@ export default function NavBar(props) {
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
 
-    const getGenres = async() => {
-        let url = BASE_URL + GENRE_URL + API_KEY
-        try {
-            axios.get(url)
-                .then(res => {
-                    setGenres(res.data.genres)
-            })
-        } catch (error) {
-            
-        }
-    }
-
     useEffect(() => {
         setShow(props.showNav)
     }, [props.showNav])
 
     useEffect(() => {
-        getGenres()
+        props.actions.loadGenres()
         let items = []
         countries.map((country, index) => {
             items.push(
@@ -47,9 +35,9 @@ export default function NavBar(props) {
     }, [])
 
     useEffect(() => {
-        if (genres.length > 0) {
+        if (props.genres.length > 0) {
             let items = []
-            genres.map((genre, index) => {
+            props.genres.map((genre, index) => {
                 items.push(
                     <DropdownItem key={index}>
                         {genre.name}
@@ -58,7 +46,7 @@ export default function NavBar(props) {
             })
             setGenreDropdownItems(items)
         }
-    }, [genres])
+    }, [props.genres])
 
     return (
         <Navbar fixed="top" color="dark" dark expand="md" className={ show ? 'nav-show' : 'nav-hide'}>
@@ -96,3 +84,21 @@ export default function NavBar(props) {
         </Navbar>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        genres: state.genres.length === 0 
+            ? [] 
+            : state.genres
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: {
+            loadGenres: bindActionCreators(genreActions.loadGenres, dispatch)
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
