@@ -1,0 +1,10 @@
+.movie-section {
+    margin: 0 4rem;
+}
+
+.movie-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
