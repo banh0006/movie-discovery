@@ -1,34 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as movieActions from '../../redux/actions/movieActions'
+import MovieCarousel from '../atoms/MovieCarousel'
 
-import { BASE_URL, NOW_PLAYING_URL, API_KEY } from '../../asset/GlobalData'
-import axios from 'axios'
-
-export default function Home() {
-    const [nowPlaying, setNowPlaying] = useState([])
-
-    const getNowPlayingMovies = async() => {
-        let url = BASE_URL + NOW_PLAYING_URL + API_KEY + "&page=1"
-        try {
-            axios.get(url)
-                .then(res => {
-                    setNowPlaying(res.data)
-            })
-
-        } catch (error) {
-            
-        }
-    }
-
+export function Home(props) {
     useEffect(() => {
-        getNowPlayingMovies()
+        props.actions.loadNowPlayingMovies()
     }, [])
-
-    useEffect(()=> {
-
-    }, [nowPlaying])
 
     return (
         <div>
+            <MovieCarousel />
             The standard Lorem Ipsum passage, used since the 1500s
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
@@ -118,3 +101,21 @@ Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
         </div>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        nowPlaying: state.movies.nowPlaying.length === 0 
+            ? [] 
+            : state.movies.nowPlaying
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: {
+            loadNowPlayingMovies: bindActionCreators(movieActions.loadNowPlayingMovies, dispatch)
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

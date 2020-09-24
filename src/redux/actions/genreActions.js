@@ -9,8 +9,8 @@ export function loadGenres() {
     return function(dispatch) {
         return genreApi
             .getGenres()
-            .then(genres => {
-                dispatch(loadGenresSuccess(genres))
+            .then(res => {
+                dispatch(loadGenresSuccess(res.genres))
             })
             .catch(error => {
                 console.error(error)

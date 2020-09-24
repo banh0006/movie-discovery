@@ -2,6 +2,30 @@
     min-height: 100px;
 }
 
+.navbar-brand, .nav-link {
+    color: #000;
+}
+
+.navbar-brand:hover , .nav-link:hover {
+    color: #fff;
+}
+
+a.light.navbar-brand {
+    color: #fff;
+}
+
+a.dark.navbar-brand {
+    color: #000;
+}
+
+.dark.navbar-nav li a {
+    color: #000;
+}
+
+.light.navbar-nav li a {
+    color: #fff;
+}
+
 .input-search {
     width: 100%;
     display: block;

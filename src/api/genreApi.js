@@ -1,4 +1,4 @@
-import { handleResponse, handleError } from "./apiUtils";
+import { handleResponse, handleError } from "./apiUtils"
 import { BASE_URL, GENRE_URL, API_KEY } from '../asset/GlobalData'
 import axios from 'axios'
 

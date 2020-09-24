@@ -1,0 +1,11 @@
+.carousel-item img {
+    width: 100%;
+}
+
+.carousel-caption.dark h3,  .carousel-caption.dark p{
+    color: #000;
+}
+
+.carousel-caption.light h3,  .carousel-caption.light p{
+    color: #fff;
+}

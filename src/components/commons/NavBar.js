@@ -49,11 +49,11 @@ export function NavBar(props) {
     }, [props.genres])
 
     return (
-        <Navbar fixed="top" color="dark" dark expand="md" className={ show ? 'nav-show' : 'nav-hide'}>
-            <NavbarBrand href="/">Home</NavbarBrand>
+        <Navbar fixed="top" expand="md" className={ show ? 'nav-show' : 'nav-hide'}>
+            <NavbarBrand href="/" className={props.textColor} >Home</NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
-                <Nav className="mr-auto" navbar>
+                <Nav className={`mr-auto ${props.textColor}`} navbar>
                     <UncontrolledDropdown nav inNavbar>
                         <DropdownToggle nav caret>
                             Genre
@@ -89,7 +89,9 @@ function mapStateToProps(state) {
     return {
         genres: state.genres.length === 0 
             ? [] 
-            : state.genres
+            : state.genres,
+
+        textColor: state.navbar.textColor
     }
 }
 

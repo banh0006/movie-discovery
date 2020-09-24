@@ -1,14 +1,13 @@
 export async function handleResponse(response) {
     if (response.status === 200) {
-        console.log(response.data.genres)
-        return response.data.genres
-        // return response.json()
+      console.log(response)
+        return response.data
     }
     if (response.status === 400) {
       const error = await response.text()
       throw new Error(error)
     }
-    throw new Error("Network response was not ok.");
+    throw new Error("Network response was not ok.")
   }
   
   export function handleError(error) {
