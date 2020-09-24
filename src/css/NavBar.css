@@ -57,6 +57,21 @@ a.dark.navbar-brand {
     transition: visibility 0s 0.3s;
 }
 
+/**
+    Drop down menu 
+*/
+.dropdown-menu.show {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    right: auto !important;
+    min-width: 25rem;
+    max-width: 40rem;
+}
+
+button.dropdown-menu {
+    width: 30% !important;
+}
+
 @keyframes showNavBar {
     0%   {top: -50px;}
     50%  {top: -25px;}
