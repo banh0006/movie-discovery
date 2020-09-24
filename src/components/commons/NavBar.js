@@ -14,12 +14,17 @@ export function NavBar(props) {
     const countries = COUNTRIES
 
     const [show, setShow] = useState({ ...props.showNav })
+    const [isTransparent, setIsTransparent] = useState({ ...props.isTransparent })
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
 
     useEffect(() => {
         setShow(props.showNav)
     }, [props.showNav])
+
+    useEffect(() => {
+        setIsTransparent(props.isTransparent)
+    }, [props.isTransparent])
 
     useEffect(() => {
         props.actions.loadGenres()
@@ -49,7 +54,7 @@ export function NavBar(props) {
     }, [props.genres])
 
     return (
-        <Navbar fixed="top" expand="md" className={ show ? 'nav-show' : 'nav-hide'}>
+        <Navbar fixed="top" expand="md" className={ `${show ? 'nav-show' : 'nav-hide'} ${isTransparent ? 'transparent-nav' : 'non-transparent'}`}>
             <NavbarBrand href="/" className={props.textColor} >Home</NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
