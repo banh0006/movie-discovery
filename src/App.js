@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from './components/commons/NavBar'
 import Home from './components/pages/Home'
 import MovieDetails from './components/pages/MovieDetails'
-import LatestMovies from './components/pages/LatestMovies'
-import TrendingMovies from './components/pages/TrendingMovies'
+import TopRatedMovies from './components/pages/TopRatedMovies'
+import PopularMovies from './components/pages/PopularMovies'
 
 // axios.defaults.baseURL = 'https://...'
 function App() {
@@ -18,8 +18,10 @@ function App() {
     const currentPosition = window.pageYOffset
 
     if (carouselHeight <= 0 ) {
-      const height = document.querySelector('.carousel').clientHeight
-      setCarouselHeight(height)
+      if (document.querySelector('.carousel')) {
+        const height = document.querySelector('.carousel').clientHeight
+        setCarouselHeight(height)
+      }
     }
 
     // show/hide navbar when scroll
@@ -51,8 +53,8 @@ function App() {
       <div className="App">
         <Navbar showNav={showNav} isTransparent={transparentNav} />
         <Switch>
-          <Route path="/latest" component={LatestMovies} />
-          <Route path="/trending" component={TrendingMovies} />
+          <Route path="/popular" component={PopularMovies} />
+          <Route path="/toprated" component={TopRatedMovies} />
           <Route path="/details" component={MovieDetails} />
           <Route path="/" component={Home} />
         </Switch>

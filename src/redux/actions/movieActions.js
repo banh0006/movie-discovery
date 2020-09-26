@@ -9,6 +9,10 @@ export function loadRecommendedMoviesSuccess(movies) {
     return { type: actionTypes.LOAD_RECOMMENDED_MOVIE_SUCCESS, movies }
 }
 
+export function loadPopularMoviesSuccess(movies) {
+    return { type: actionTypes.LOAD_POPULAR_MOVIE_SUCCESS, movies }
+}
+
 export function loadNowPlayingMovies() {
     return function(dispatch) {
         return movieApi
@@ -50,9 +54,16 @@ export function loadNowPlayingMovies() {
     }
 }
 
-export function loadRecommendedMovies() {
+export function loadPopularMovies() {
     return function(dispatch) {
-        return 
-            
+        return movieApi
+            .getPopularMovies()
+            .then(res => {
+                dispatch(loadPopularMoviesSuccess(res))
+            })
+            .catch(error => {
+                console.error(error)
+                throw error
+            })
     }
 }

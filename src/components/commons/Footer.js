@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function TrendingMovies() {
+export default function Footer() {
     return (
         <div>
-            Trending movies
+            
         </div>
     )
 }

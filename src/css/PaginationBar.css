@@ -1,0 +1,8 @@
+.active-page a {
+    background-color: #57b8df !important;
+}
+
+a.page-link {
+    background-color: #000;
+    color: #fff;
+}

@@ -1,5 +1,6 @@
 .carousel {
     width: 100%;
+    box-shadow: 12px 0 50px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-item img {

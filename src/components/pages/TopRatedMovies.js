@@ -1,7 +1,8 @@
 import React from 'react'
 import { Container } from 'reactstrap'
 
-export default function LatestMovies() {
+export default function TopRatedMovies
+() {
     return (
         <Container className="pages">
             Lastest movie

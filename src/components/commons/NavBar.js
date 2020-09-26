@@ -76,10 +76,10 @@ export function NavBar(props) {
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <NavItem>
-                        <NavLink href="/latest">Latest</NavLink>
+                        <NavLink href="/toprated">Top Rated</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/trending">Trending</NavLink>
+                        <NavLink href="/popular">Popular</NavLink>
                     </NavItem>
                 </Nav>
                 <NavItem className="input-search">
