@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './css/App.css'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from './components/commons/NavBar'
 import Home from './components/pages/Home'
 import MovieDetails from './components/pages/MovieDetails'
@@ -49,7 +49,7 @@ function App() {
   })
 
   return (
-    <Router>
+    <Router basename='/'>
       <div className="App">
         <Navbar showNav={showNav} isTransparent={transparentNav} />
         <Switch>
