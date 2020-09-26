@@ -49,7 +49,7 @@ function App() {
   })
 
   return (
-    <Router>
+    <Router basename='/movie-discovery'>
       <div className="App">
         <Navbar showNav={showNav} isTransparent={transparentNav} />
         <Switch>
