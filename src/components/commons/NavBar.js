@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavLink, NavbarBrand, 
+import { NavLink } from 'react-router-dom'
+import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavbarBrand,
     UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap'
 import '../../css/NavBar.css'
 import InputSearch from '../atoms/InputSearch'
@@ -55,7 +56,7 @@ export function NavBar(props) {
 
     return (
         <Navbar fixed="top" expand="md" className={ `${show ? 'nav-show' : 'nav-hide'} ${isTransparent ? 'transparent-nav' : 'non-transparent'}`}>
-            <NavbarBrand href="/" className={props.textColor} >Home</NavbarBrand>
+            <NavLink to="/" className={props.textColor + " navbar-brand" } >Home</NavLink>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
                 <Nav className={`mr-auto ${props.textColor}`} navbar>
@@ -76,10 +77,10 @@ export function NavBar(props) {
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <NavItem>
-                        <NavLink href="/toprated">Top Rated</NavLink>
+                        <NavLink className="nav-link" to="/toprated">Top Rated</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/popular">Popular</NavLink>
+                        <NavLink className="nav-link" to="/popular">Popular</NavLink>
                     </NavItem>
                 </Nav>
                 <NavItem className="input-search">

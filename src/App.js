@@ -49,7 +49,7 @@ function App() {
   })
 
   return (
-    <Router basename={process.env.PUBLIC_URL + '/'}>
+    <Router>
       <div className="App">
         <Navbar showNav={showNav} isTransparent={transparentNav} />
         <Switch>
