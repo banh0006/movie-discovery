@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "eafaab2d0f16ac1bd72c9bdda5f3e253",
+    "revision": "635ca993b5269a9cabdc199080e38fb5",
     "url": "/movie-discovery/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/movie-discovery/static/css/2.d9ad5f5c.chunk.css"
   },
   {
-    "revision": "ab8c363669c2f4c52bff",
+    "revision": "623209def32e94413c09",
     "url": "/movie-discovery/static/css/main.12d07319.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/movie-discovery/static/js/2.d4a4059d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ab8c363669c2f4c52bff",
-    "url": "/movie-discovery/static/js/main.20f61441.chunk.js"
+    "revision": "623209def32e94413c09",
+    "url": "/movie-discovery/static/js/main.1fbcd654.chunk.js"
   },
   {
     "revision": "c1d29d6ee8a8d5beb35b",
