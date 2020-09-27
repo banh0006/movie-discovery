@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as movieActions from '../../redux/actions/movieActions'
+import * as navbarActions from '../../redux/actions/navbarActions'
 import { sectionNames } from '../../asset/GlobalData'
 import MovieCarousel from '../atoms/MovieCarousel'
 import MovieSection from '../organisms/MovieSection'
@@ -10,6 +11,7 @@ import '../../css/Home.css'
 
 export function Home(props) {
     useEffect(() => {
+        props.actions.setHomePage(true)
         props.actions.loadNowPlayingMovies()
     }, [])
 
@@ -36,7 +38,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            loadNowPlayingMovies: bindActionCreators(movieActions.loadNowPlayingMovies, dispatch)
+            loadNowPlayingMovies: bindActionCreators(movieActions.loadNowPlayingMovies, dispatch),
+            setHomePage: bindActionCreators(navbarActions.setHomepage, dispatch)
         }
     }
 }

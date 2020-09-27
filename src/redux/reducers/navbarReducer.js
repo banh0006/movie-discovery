@@ -1,13 +1,13 @@
 import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
-    textColor: 'dark'
+    homepage: true
 }
 
 export default function navbarReducer(state = initialState, action) {
     switch(action.type) {
-        case actionTypes.SET_TEXT_COLOR: 
-            return { textColor: action.color }
+        case actionTypes.SET_HOME_PAGE:
+            return { ...state, homepage: action.value }
         default:
             return state
     }

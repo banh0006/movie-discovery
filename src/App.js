@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import './css/App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from './components/commons/NavBar'
@@ -8,13 +9,19 @@ import TopRatedMovies from './components/pages/TopRatedMovies'
 import PopularMovies from './components/pages/PopularMovies'
 
 // axios.defaults.baseURL = 'https://...'
-function App() {
+function App(props) {
   const [showNav, setShowNav] = useState(true)
   const [transparentNav, setTransparentNav] = useState(true)
   const [scrolledPosition, setSrolledPosition] = useState(0)
   const [carouselHeight, setCarouselHeight] = useState(0)
 
   const handleScroll = () => {
+    if (!props.homepage) {
+      setTransparentNav(false)
+      setShowNav(true)
+      return
+    }
+
     const currentPosition = window.pageYOffset
 
     if (carouselHeight <= 0 ) {
@@ -48,6 +55,19 @@ function App() {
     }
   })
 
+  useEffect(() => {
+    if (props.homepage) {
+      const currentPosition = window.pageYOffset
+      if(currentPosition === 0) {
+        setTransparentNav(true)
+      } else {
+        setTransparentNav(false)
+      }
+    } else {
+      setTransparentNav(false)
+    }
+  }, [props.homepage])
+
   return (
     <Router>
       <div className="App">
@@ -63,4 +83,10 @@ function App() {
   )
 }
 
-export default App
+function mapStateToProps(state) {
+  return {
+      homepage: state.navbar.homepage
+  }
+}
+
+export default connect(mapStateToProps)(App)

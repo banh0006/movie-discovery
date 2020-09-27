@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as movieActions from '../../redux/actions/movieActions'
+import * as navbarActions from '../../redux/actions/navbarActions'
 import MovieList from '../molecules/MovieList'
 import FilterBar from '../molecules/FilterBar'
 import { Container, Row } from 'reactstrap'
@@ -29,6 +30,7 @@ export function PopularMovies(props) {
     }
 
     useEffect(() => {
+        props.actions.setHomePage(false)
         if (movies.length === 0) {
             props.actions.loadPopularMovies()
         }
@@ -67,7 +69,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            loadPopularMovies: bindActionCreators(movieActions.loadPopularMovies, dispatch)
+            loadPopularMovies: bindActionCreators(movieActions.loadPopularMovies, dispatch),
+            setHomePage: bindActionCreators(navbarActions.setHomepage, dispatch)
         }
     }
 }
