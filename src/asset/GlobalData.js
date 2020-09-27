@@ -17,3 +17,11 @@ export const COUNTRIES = [
     "United States", "France", "Canada", "Italy", "United Kingdom", "Russia", 
     "Korean", "Japan", "Hongkong", "China", "South Africa", "Brazil"
 ]
+
+export const YEARS = [
+    2020, 2019, 2018, 2016, 2015, 2014, 2013, 2012, 2010
+]
+
+export const SORT_OPTIONS = [
+    "Default", "Release Date", "Name", "Rate", "Most Watched"
+]

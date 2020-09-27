@@ -1,0 +1,41 @@
+.filter-bar-wrapper {
+    margin: 8rem 0 0 0;
+    width: 100%;
+}
+
+.filter-bar-wrapper ul {
+    margin: 0 1rem;
+    justify-content: center;
+    align-items: center;
+    background: #6c757d;
+}
+
+.filter-bar-wrapper ul li a {
+    border-radius: 0.25rem;
+    color: #fff;
+}
+
+.filter-bar-wrapper ul li.show a {
+    background-color: #000;
+}
+
+.filter-bar-wrapper ul li a svg {
+    height: 1.2em;
+    width: 1.2em;
+}
+
+.filter-bar ul li a::after {
+    display: none;
+}
+
+.filter-bar ul li {
+    margin: 0.5rem 1.5rem;
+}
+
+.year-filter .dropdown-menu.show, .sort-filter .dropdown-menu.show {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    max-width: 10rem;
+    right: auto !important;
+    min-width: 5rem;
+}
