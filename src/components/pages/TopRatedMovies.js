@@ -41,11 +41,11 @@ export function TopRatedMovies(props) {
         setMovies(props.topRatedMovies)
     }, [props.topRatedMovies])
     return (
-        <Container>
+        <Container id="top-rated-movies">
             <Row className="filter-bar">
                 <FilterBar />
             </Row>
-            <Row className="top-rated-movies" id="top-rated-movies">
+            <Row className="top-rated-movies">
                 <div className="top-rated-movie-list" style={styles.topRatedMovieContainer}>
                     <MovieList movieList={currentMovies} />
                 </div>

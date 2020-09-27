@@ -42,11 +42,11 @@ export function PopularMovies(props) {
     }, [props.popularMovies])
 
     return (
-        <Container>
+        <Container id="popular-movies">
             <Row className="filter-bar">
                 <FilterBar />
             </Row>
-            <Row className="popular-movies" id="popular-movies">
+            <Row className="popular-movies">
                 <div className="popular-movie-list" style={styles.popularMovieContainer}>
                     <MovieList movieList={currentMovies} />
                 </div>
