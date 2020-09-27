@@ -13,6 +13,10 @@ export function loadPopularMoviesSuccess(movies) {
     return { type: actionTypes.LOAD_POPULAR_MOVIE_SUCCESS, movies }
 }
 
+export function loadTopRatedMoviesSuccess(movies) {
+    return { type: actionTypes.LOAD_TOP_RATED_MOVIE_SUCCESS, movies }
+}
+
 export function loadNowPlayingMovies() {
     return function(dispatch) {
         return movieApi
@@ -60,6 +64,20 @@ export function loadPopularMovies() {
             .getPopularMovies()
             .then(res => {
                 dispatch(loadPopularMoviesSuccess(res))
+            })
+            .catch(error => {
+                console.error(error)
+                throw error
+            })
+    }
+}
+
+export function loadTopRatedMovies() {
+    return function(dispatch) {
+        return movieApi
+            .getTopRatedMovies()
+            .then(res => {
+                dispatch(loadTopRatedMoviesSuccess(res))
             })
             .catch(error => {
                 console.error(error)

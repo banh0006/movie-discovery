@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as movieActions from '../../redux/actions/movieActions'
-import { Container, Row, Col } from 'reactstrap'
-
 import MovieList from '../molecules/MovieList'
+import { Container, Row } from 'reactstrap'
 import PaginationBar from '../molecules/PaginationBar'
 
 export function PopularMovies(props) {
     const [movies, setMovies] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
-    const [moviesPerPage, setMoviesPerPage] = useState(40)
+    const moviesPerPage = 40
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 

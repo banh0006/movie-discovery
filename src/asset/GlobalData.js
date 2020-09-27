@@ -3,6 +3,7 @@ export const BASE_URL = "https://api.themoviedb.org/3/"
 export const GENRE_URL = 'genre/movie/list?api_key='
 export const NOW_PLAYING_URL = 'movie/now_playing?api_key='
 export const POPULAR_URL = 'movie/popular?api_key='
+export const TOP_RATED_URL = 'movie/top_rated?api_key='
 export const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w1280'
 export const MOVIE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500'
 

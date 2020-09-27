@@ -4,7 +4,7 @@ const initialState = {
     nowPlaying: [],
     searchMovies: [],
     recommendedMovies: [],
-    topRateMovies: [],
+    topRatedMovies: [],
     popularMovies: [],
 }
 
@@ -16,6 +16,8 @@ export default function movieReducer(state = initialState, action) {
             return { ...state, recommendedMovies: action.movies }
         case actionTypes.LOAD_POPULAR_MOVIE_SUCCESS:
             return { ...state, popularMovies: action.movies }
+        case actionTypes.LOAD_TOP_RATED_MOVIE_SUCCESS:
+            return { ...state, topRatedMovies: action.movies }
         case actionTypes.LOAD_LATEST_MOVIES:
             return { ...state, latestMovies: action.latestMovies }
         case actionTypes.LOAD_TRENDING_MOVIES:
