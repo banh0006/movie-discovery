@@ -51,7 +51,8 @@ export function TopRatedMovies(props) {
                 </div>
             </Row>
             <Row className="pagination-bar" style={styles.paginationBar}>
-                <PaginationBar moviesPerPage={moviesPerPage} totalMovies={movies.length} currentPage={currentPage} paginate={paginate} />
+                <PaginationBar moviesPerPage={moviesPerPage} totalMovies={movies.length} 
+                    currentPage={currentPage} paginate={paginate} link="#top-rated-movies" />
             </Row>
         </Container>
     )
