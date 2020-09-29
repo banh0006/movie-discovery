@@ -2,6 +2,7 @@ export const API_KEY = "323c169d6502f84d4a8a225e5732db2c"
 export const BASE_URL = "https://api.themoviedb.org/3/"
 export const GENRE_URL = 'genre/movie/list?api_key='
 export const NOW_PLAYING_URL = 'movie/now_playing?api_key='
+export const UPCOMING_URL = "movie/upcoming?api_key="
 export const POPULAR_URL = 'movie/popular?api_key='
 export const TOP_RATED_URL = 'movie/top_rated?api_key='
 export const SEARCH_URL = 'search/movie?api_key='
@@ -10,7 +11,7 @@ export const MOVIE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500'
 
 export const sectionNames = {
     RECOMMENDED_MOVIES: "Recommend Movies",
-    LATEST_MOVIES: "Lastest Movies",
+    UPCOMING_MOVIES: "Upcoming Movies",
     TRENDING_MOVIES: "Trending Movies"
 }
 

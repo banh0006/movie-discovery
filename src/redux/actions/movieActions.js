@@ -9,6 +9,10 @@ export function loadRecommendedMoviesSuccess(movies) {
     return { type: actionTypes.LOAD_RECOMMENDED_MOVIE_SUCCESS, movies }
 }
 
+export function loadUpcomingMoviesSuccess(movies) {
+    return { type: actionTypes.LOAD_UPCOMING_MOVIE_SUCCESS, movies}
+}
+
 export function loadPopularMoviesSuccess(movies) {
     return { type: actionTypes.LOAD_POPULAR_MOVIE_SUCCESS, movies }
 }
@@ -54,6 +58,28 @@ export function loadNowPlayingMovies() {
             .catch(error => {
                 console.error(error)
                 throw error
+            })
+    }
+}
+
+export function loadUpcomingMovies() {
+    return function(dispatch) {
+        return movieApi
+            .getUpcomingMovies()
+            .then(res => {
+                let upcomingList = [] 
+                if (res.results < 0) return
+                if (res.results.length > 20) {
+                    for (let i = 0; i < 20; i++) {
+                        upcomingList.push(res.results[i])
+                    }
+                } else {
+                    for(let movie of res.results) {
+                        upcomingList.push(movie)
+                    }
+                }
+
+                dispatch(loadUpcomingMoviesSuccess(upcomingList))
             })
     }
 }

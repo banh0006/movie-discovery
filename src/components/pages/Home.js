@@ -10,9 +10,16 @@ import { Container, Row } from 'reactstrap'
 import '../../css/Home.css'
 
 export function Home(props) {
+    const styles = {
+        recommendedSection: {
+            'margin-top': '2rem'
+        }
+    }
+
     useEffect(() => {
         props.actions.setHomePage(true)
         props.actions.loadNowPlayingMovies()
+        props.actions.loadUpcomingMovies()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -21,8 +28,11 @@ export function Home(props) {
             <Row>
                 <MovieCarousel />
             </Row>
-            <Row>
+            <Row style={styles.recommendedSection}>
                 <MovieSection sectionName={sectionNames.RECOMMENDED_MOVIES} />
+            </Row>
+            <Row>
+                <MovieSection sectionName={sectionNames.UPCOMING_MOVIES} />
             </Row>
         </Container>
     )
@@ -30,9 +40,7 @@ export function Home(props) {
 
 function mapStateToProps(state) {
     return {
-        nowPlaying: state.movies.nowPlaying.length === 0 
-            ? [] 
-            : state.movies.nowPlaying
+        
     }
 }
 
@@ -40,6 +48,7 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: {
             loadNowPlayingMovies: bindActionCreators(movieActions.loadNowPlayingMovies, dispatch),
+            loadUpcomingMovies: bindActionCreators(movieActions.loadUpcomingMovies, dispatch),
             setHomePage: bindActionCreators(navbarActions.setHomepage, dispatch)
         }
     }

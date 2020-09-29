@@ -17,7 +17,8 @@ export function MovieSection(props) {
                 setMovies(props.recommended)
             break
 
-            case sectionNames.LATEST_MOVIES:
+            case sectionNames.UPCOMING_MOVIES:
+                setMovies(props.upcoming)
                 break
 
             case sectionNames.TRENDING_MOVIES:
@@ -27,7 +28,7 @@ export function MovieSection(props) {
                 break
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.recommended])
+    }, [props.recommended, props.upcoming ])
 
     return (
         <Container className="movie-section">
@@ -43,9 +44,8 @@ export function MovieSection(props) {
 
 function mapStateToProps(state) {
     return {
-        recommended: state.movies.recommendedMovies.length === 0 
-            ? [] 
-            : state.movies.recommendedMovies
+        recommended: state.movies.recommendedMovies,
+        upcoming: state.movies.upcomingMovies
     }
 }
   
