@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as movieActions from '../../redux/actions/movieActions'
 import * as navbarActions from '../../redux/actions/navbarActions'
+import { Container, Row } from 'reactstrap'
 import MovieList from '../molecules/MovieList'
 import FilterBar from '../molecules/FilterBar'
-import { Container, Row } from 'reactstrap'
 import PaginationBar from '../molecules/PaginationBar'
 
 export function PopularMovies(props) {
@@ -22,6 +22,9 @@ export function PopularMovies(props) {
     const styles = {
         popularMovieContainer: {
             'margin': '0 1rem'
+        },
+        filterBar: {
+            'margin': '8rem 0 0 0'
         },
         paginationBar: {
             'justifyContent': 'center',
@@ -43,7 +46,7 @@ export function PopularMovies(props) {
 
     return (
         <Container id="popular-movies">
-            <Row className="filter-bar">
+            <Row className="filter-bar" style={styles.filterBar}>
                 <FilterBar />
             </Row>
             <Row className="popular-movies">

@@ -23,6 +23,9 @@ export function TopRatedMovies(props) {
         topRatedMovieContainer: {
             'margin': '0 1rem'
         },
+        filterBar: {
+            'margin': '8rem 0 0 0'
+        },
         paginationBar: {
             'justifyContent': 'center',
             'alignItems': 'center'
@@ -42,7 +45,7 @@ export function TopRatedMovies(props) {
     }, [props.topRatedMovies])
     return (
         <Container id="top-rated-movies">
-            <Row className="filter-bar">
+            <Row className="filter-bar" style={styles.filterBar}>
                 <FilterBar />
             </Row>
             <Row className="top-rated-movies">

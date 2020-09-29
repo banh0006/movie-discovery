@@ -129,7 +129,6 @@ export function FilterBar(props) {
 
     useEffect(() => {
         const genresChecked = getChecked(genreCheckBoxsState)    
-        console.log("checked = " + genresChecked)
         if (genresChecked === 0) {
             setGenreValueText('All')
         } else {

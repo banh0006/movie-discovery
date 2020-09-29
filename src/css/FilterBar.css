@@ -1,10 +1,8 @@
 .filter-bar-wrapper {
-    margin: 8rem 0 0 0;
     width: 100%;
 }
 
 .filter-bar-wrapper ul {
-    margin: 0 1rem;
     justify-content: center;
     align-items: center;
     background: #6c757d;

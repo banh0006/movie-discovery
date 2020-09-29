@@ -7,6 +7,7 @@ import Home from './components/pages/Home'
 import MovieDetails from './components/pages/MovieDetails'
 import TopRatedMovies from './components/pages/TopRatedMovies'
 import PopularMovies from './components/pages/PopularMovies'
+import SearchPage from './components/pages/SearchPage'
 
 // axios.defaults.baseURL = 'https://...'
 function App(props) {
@@ -76,6 +77,7 @@ function App(props) {
           <Route path="/popular" component={PopularMovies} />
           <Route path="/toprated" component={TopRatedMovies} />
           <Route path="/details" component={MovieDetails} />
+          <Route path='/search' component={SearchPage} />
           <Route path="/" component={Home} />
         </Switch>
       </div>
