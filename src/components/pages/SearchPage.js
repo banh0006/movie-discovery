@@ -21,14 +21,14 @@ export function SearchPage(props) {
     const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie)
 
     const styles = {
-        searchTitle: {
-            'margin': '8rem 0 0 0'
+        pageContainer: {
+            'padding-top': '8rem'
         },
         searchMovieContainer: {
             'margin': '0 1rem'
         },
-        filterBar: {
-            'margin': '2rem 0'
+        searchTitle: {
+            'margin': '0rem 1rem 2rem 1rem'
         },
         paginationBar: {
             'justifyContent': 'center',
@@ -87,13 +87,13 @@ export function SearchPage(props) {
 
 
     return (
-        <Container id="search-movies">
-            <Row className="search-title" style={styles.searchTitle}>
-                <h2>
+        <Container id="search-movies" style={styles.pageContainer}>
+            <Row className="search-title">
+                <h2 style={styles.searchTitle}>
                     {`Results for: ${searchString}`}
                 </h2>
             </Row>
-            <Row className="filter-bar" style={styles.filterBar}>
+            <Row className="filter-bar">
                 <FilterBar/>
             </Row>
             <Row className="search-movies">
@@ -102,8 +102,13 @@ export function SearchPage(props) {
                 </div>
             </Row>
             <Row className="pagination-bar" style={styles.paginationBar}>
-                <PaginationBar moviesPerPage={moviesPerPage} totalMovies={movies.length} 
-                    currentPage={currentPage} paginate={paginate} link="#search-movies" />
+                {movies.length > 0 && 
+                    (
+                        <PaginationBar moviesPerPage={moviesPerPage} totalMovies={movies.length} 
+                            currentPage={currentPage} paginate={paginate} link="#search-movies" />
+                    )
+                }
+                
             </Row>
         </Container>
     )

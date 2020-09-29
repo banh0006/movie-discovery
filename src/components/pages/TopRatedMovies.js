@@ -20,11 +20,11 @@ export function TopRatedMovies(props) {
     const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie)
 
     const styles = {
+        pageContainer: {
+            'padding-top': '8rem'
+        },
         topRatedMovieContainer: {
             'margin': '0 1rem'
-        },
-        filterBar: {
-            'margin': '8rem 0 0 0'
         },
         paginationBar: {
             'justifyContent': 'center',
@@ -44,8 +44,8 @@ export function TopRatedMovies(props) {
         setMovies(props.topRatedMovies)
     }, [props.topRatedMovies])
     return (
-        <Container id="top-rated-movies">
-            <Row className="filter-bar" style={styles.filterBar}>
+        <Container id="top-rated-movies" style={styles.pageContainer}>
+            <Row className="filter-bar">
                 <FilterBar />
             </Row>
             <Row className="top-rated-movies">
