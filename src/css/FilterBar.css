@@ -13,6 +13,9 @@
 .filter-bar-wrapper ul li a {
     border-radius: 0.25rem;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .filter-bar-wrapper ul li.show a {
@@ -24,18 +27,45 @@
     width: 1.2em;
 }
 
-.filter-bar ul li a::after {
+.filter-bar-wrapper ul li a::after {
     display: none;
 }
 
-.filter-bar ul li {
+.filter-bar-wrapper ul li {
     margin: 0.5rem 1.5rem;
+}
+
+.filter-bar-wrapper ul li a svg {
+    margin-right: 0.5rem;
 }
 
 .year-filter .dropdown-menu.show, .sort-filter .dropdown-menu.show {
     display: grid !important;
     grid-template-columns: 1fr;
-    max-width: 10rem;
     right: auto !important;
+}
+
+.sort-filter .dropdown-menu.show {
+    max-width: 15rem;
+    min-width: 10rem;
+}
+
+.year-filter .dropdown-menu.show {
+    max-width: 10rem;
     min-width: 5rem;
+}
+
+.genre-filter-item, .year-filter-item, .country-filter-item, .sort-filter-item {
+    display: flex !important;
+    align-items: center;
+}
+
+.genre-filter-item input, .year-filter-item input, .country-filter-item input, .sort-filter-item input {
+    margin-right: 0.3rem;
+}
+
+.genre-value, .year-value, .country-value, .sort-value {
+    margin-left: 0.3rem;
+    font-weight: bold;
+    text-decoration: underline;
 }

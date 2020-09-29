@@ -2,6 +2,8 @@ export const LOAD_GENRES_SUCCESS = "LOAD_GENRES_SUCCESS"
 
 export const SET_HOME_PAGE = "SET_HOME_PAGE"
 
+export const SET_FILTER_OPTION = "SET_FILTER_OPTION"
+
 // #region movie actions
 
 export const LOAD_NOW_PLAYING_MOVIE_SUCCESS = "LOAD_NOW_PLAYING_MOVIE_SUCCESS"
