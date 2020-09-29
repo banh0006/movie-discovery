@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavbarBrand,
+import { Navbar, NavbarToggler, Collapse, Nav, NavItem,
     UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap'
 import '../../css/NavBar.css'
 import InputSearch from '../atoms/InputSearch'
@@ -36,8 +36,10 @@ export function NavBar(props) {
                     {country}
                 </DropdownItem>
             )
+            return null
         })
         setCountryDropdownItems(items)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -49,6 +51,7 @@ export function NavBar(props) {
                         {genre.name}
                     </DropdownItem>
                 )
+                return null
             })
             setGenreDropdownItems(items)
         }

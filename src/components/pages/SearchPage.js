@@ -49,6 +49,7 @@ export function SearchPage(props) {
                     if (res.data.results) {
                         combinedData.push(...res.data.results)
                     }
+                    return null
                 })
                 setMovies(combinedData)
             })
@@ -73,6 +74,7 @@ export function SearchPage(props) {
                 getSearchMovies(searchQuery)
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -83,6 +85,7 @@ export function SearchPage(props) {
                 getSearchMovies(searchQuery)
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.location.state])
 
 

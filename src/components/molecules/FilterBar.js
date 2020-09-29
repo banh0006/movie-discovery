@@ -75,6 +75,7 @@ export function FilterBar(props) {
                     {country}
                 </div>
             )
+            return null
         })
 
         years.map((year, index) => {
@@ -87,24 +88,26 @@ export function FilterBar(props) {
                     {year}
                 </div>
             )
+            return null
         })
 
         sorts.map((sort, index) => {
             sortItems.push(
                 <div key={index} className="dropdown-item sort-filter-item">
                     <input type="radio" name={sort} 
-                        name="sort-type"
                         value={sort} 
                         onChange={hanldeSortCheckBoxsChange} 
                     />
                     {sort}
                 </div>
             )
+            return null
         })
 
         setCountryDropdownItems(countryItems)
         setYearDropdownItems(yearItems)
         setSortDropdownItems(sortItems)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -122,9 +125,11 @@ export function FilterBar(props) {
                         {genre.name}
                     </div>
                 )
+                return null
             })
             setGenreDropdownItems(items)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.genres])
 
     useEffect(() => {
@@ -139,6 +144,7 @@ export function FilterBar(props) {
                 setGenreValueText(`${genresChecked} selected`)
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [genreCheckBoxsState])
 
     useEffect(() => {
@@ -154,6 +160,7 @@ export function FilterBar(props) {
                 setYearValueText(`${yearsChecked} selected`)
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [yearCheckBoxsState])
 
     useEffect(() => {
@@ -169,6 +176,7 @@ export function FilterBar(props) {
                 setCountryValueText(`${countryChecked} selected`)
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [countryCheckBoxsState])
 
     return (

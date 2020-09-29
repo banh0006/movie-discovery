@@ -13,6 +13,7 @@ export function Home(props) {
     useEffect(() => {
         props.actions.setHomePage(true)
         props.actions.loadNowPlayingMovies()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

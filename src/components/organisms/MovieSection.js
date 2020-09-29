@@ -1,10 +1,8 @@
 import React, { useState ,useEffect } from 'react'
 import SectionHeading from '../atoms/SectionHeading'
 import MovieList from '../molecules/MovieList'
-import { Container, Row, Col } from 'reactstrap'
-
+import { Container } from 'reactstrap'
 import { sectionNames } from '../../asset/GlobalData'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import '../../css/MovieSection.css'
 
@@ -20,11 +18,15 @@ export function MovieSection(props) {
             break
 
             case sectionNames.LATEST_MOVIES:
-            break
+                break
 
             case sectionNames.TRENDING_MOVIES:
-            break
+                break
+
+            default:
+                break
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.recommended])
 
     return (

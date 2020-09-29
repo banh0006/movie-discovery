@@ -22,6 +22,7 @@ export function getPopularMovies() { //from 20 pages
             if (res.data.results) {
                 combinedData.push(...res.data.results)
             }
+            return null
         })
         return combinedData
     })
@@ -46,6 +47,7 @@ export function getTopRatedMovies() {
             if (res.data.results) {
                 combinedData.push(...res.data.results)
             }
+            return null
         })
         return combinedData
     })

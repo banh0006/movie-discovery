@@ -47,6 +47,7 @@ export default function PaginationBar({ moviesPerPage, totalMovies, currentPage,
             pageNum.push(i)
         }
         setPageNumbers(pageNum)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [totalMovies])
 
     useEffect(() => {
@@ -60,6 +61,7 @@ export default function PaginationBar({ moviesPerPage, totalMovies, currentPage,
         } else {
             setPaginationItems([])
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageNumbers, activePage])
 
     return (

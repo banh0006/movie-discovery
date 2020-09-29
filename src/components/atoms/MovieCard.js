@@ -13,6 +13,7 @@ export function MovieCard(props) {
                     genreNames.push(genre.name)
                 }
             }
+            return null
         })
         genreNames = genreNames.join(', ')
         return genreNames

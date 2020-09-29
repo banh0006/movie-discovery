@@ -37,6 +37,7 @@ export function TopRatedMovies(props) {
         if (movies.length === 0) {
             props.actions.loadTopRatedMovies()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

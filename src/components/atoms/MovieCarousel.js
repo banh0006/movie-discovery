@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap'
 import { POSTER_BASE_URL } from '../../asset/GlobalData'
-import * as navbarActions from '../../redux/actions/navbarActions'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import '../../css/MovieCarousel.css'
 
@@ -14,7 +12,7 @@ export function MovieCarousel(props) {
     useEffect(() => {
       if (props.nowPlaying) {
         const newItems = []
-        props.nowPlaying.map((movie, index) => {
+        props.nowPlaying.map(movie => {
           // isImageDark(`${POSTER_BASE_URL}${movie.backdrop_path}`, index)
           newItems.push({
             src: `${POSTER_BASE_URL}${movie.backdrop_path}`,
@@ -22,6 +20,7 @@ export function MovieCarousel(props) {
             caption: movie.original_title,
             overview: movie.overview,
           })
+          return null
         })
         setItems(newItems)
       }
