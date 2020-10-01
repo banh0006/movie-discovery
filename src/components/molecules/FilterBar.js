@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as filterbarActions from '../../redux/actions/filterbarActions'
 import { COUNTRIES, YEARS, SORT_OPTIONS } from '../../asset/GlobalData'
-
 import { UncontrolledDropdown, DropdownToggle, Nav, DropdownMenu, NavItem, Button } from 'reactstrap'
 import "../../css/FilterBar.css"
-import { TiFilter, TiArrowUnsorted } from "react-icons/ti"
+import { TiArrowUnsorted } from "react-icons/ti"
+import { RiFilterOffFill } from "react-icons/ri"
 import { AiOutlineGlobal, AiTwotoneCalendar, AiTwotoneFolderOpen } from "react-icons/ai"
 
 export function FilterBar(props) {
@@ -15,15 +17,15 @@ export function FilterBar(props) {
     const [yearDropdownItems, setYearDropdownItems] = useState([])
     const [sortDropdownItems, setSortDropdownItems] = useState([])
     const [genreDropdownItems, setGenreDropdownItems] = useState([])
-    const [genreCheckBoxsState, setGenreCheckBoxsState] = useState({})
-    const [yearCheckBoxsState, setYearCheckBoxsState] = useState({})
-    const [countryCheckBoxsState, setCountryCheckBoxsState] = useState({})
-    const [sortCheckBoxsState, setSortCheckBoxsState] = useState({})
+    const [genreCheckBoxsState, setGenreCheckBoxsState] = useState([])
+    const [yearCheckBoxsState, setYearCheckBoxsState] = useState([])
+    const [countryCheckBoxsState, setCountryCheckBoxsState] = useState([])
+    const [sortCheckBoxsState, setSortCheckBoxsState] = useState({sortType: 'Default'})
 
     const [genreValueText, setGenreValueText] = useState('All')
     const [yearValueText, setYearValueText] = useState('All')
     const [countryValueText, setCountryValueText] = useState('All')
-    const [sortValueText, setSortValueText] = useState('All')
+    const [sortValueText, setSortValueText] = useState('Default')
     
     const hanldeGenreCheckBoxsChange = (event) => {
         const { name, checked } = event.target
@@ -42,7 +44,7 @@ export function FilterBar(props) {
 
     const hanldeSortCheckBoxsChange = (event) => {
         const { value } = event.target
-        setSortCheckBoxsState(prevState => ({ ...prevState, "sort-type": value }))
+        setSortCheckBoxsState(prevState => ({ ...prevState, "sortType": value }))
         setSortValueText(value)
     }
 
@@ -59,6 +61,58 @@ export function FilterBar(props) {
     const getCheckedValue = (obj) => {
         return Object.keys(obj).find(key => obj[key] === true)
     }
+
+    const getCheckedArray = (obj) => {
+        let checkedArray = []
+        for (const [key, value] of Object.entries(obj)) {
+            if (value === true) checkedArray.push(key)
+        }
+        return checkedArray
+    }
+
+    const unCheck = (obj) => {
+        let newObj = {}
+        Object.keys(obj).map(key => {
+            newObj = { ...newObj, [key]: false}
+        })
+
+        return newObj
+    }
+
+    // const clearFilter = () => {
+    //     setGenreValueText('All')
+    //     setYearValueText('All')
+    //     setCountryValueText('All')
+    //     setSortValueText('Default')
+    //     // setGenreCheckBoxsState([])
+    //     // setYearCheckBoxsState([])
+    //     // setCountryCheckBoxsState([])
+    //     setSortCheckBoxsState({sortType: 'Default'})
+    //     if (getObjLength(genreCheckBoxsState) > 0) {
+    //         let newGenreState = unCheck(genreCheckBoxsState)
+    //         console.log(newGenreState)
+    //         setGenreCheckBoxsState(newGenreState)
+    //     }
+    //     if (getObjLength(yearCheckBoxsState) > 0) {
+    //         let newYearState = unCheck(yearCheckBoxsState)
+    //         console.log(newYearState)
+    //         setYearCheckBoxsState(newYearState)
+    //     }
+    //     if (getObjLength(countryCheckBoxsState) > 0) {
+    //         let newCountryState = unCheck(countryCheckBoxsState)
+    //         console.log(countryCheckBoxsState)
+    //         setCountryCheckBoxsState(newCountryState)
+    //     }
+
+    //     console.log("clear filter trigger")
+    //     // props.actions.setFilterOptions({ 
+    //     //     ...props.filterOptions,
+    //     //     genres: [],
+    //     //     years: [],
+    //     //     countries: [],
+    //     //     // sort: 'Default' 
+    //     // })
+    // }
 
     useEffect(() => {
         let countryItems = []
@@ -94,7 +148,8 @@ export function FilterBar(props) {
         sorts.map((sort, index) => {
             sortItems.push(
                 <div key={index} className="dropdown-item sort-filter-item">
-                    <input type="radio" name={sort} 
+                    <input type="radio" name="sort"
+                        key={index}
                         value={sort} 
                         onChange={hanldeSortCheckBoxsChange} 
                     />
@@ -110,7 +165,58 @@ export function FilterBar(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect(() => {
+        let yearItems = []
+        years.map((year, index) => {
+            yearItems.push(
+                <div key={index} className="dropdown-item year-filter-item">
+                    <input type="checkbox" name={year} 
+                        checked={yearCheckBoxsState[year]} 
+                        onChange={hanldeYearCheckBoxsChange} 
+                    />
+                    {year}
+                </div>
+            )
+            setYearDropdownItems(yearItems)
+            return null
+        })
+    }, [yearCheckBoxsState])
 
+    useEffect(() => {
+        let countryItems = []
+        countries.map((country, index) => {
+            countryItems.push(
+                <div key={index} className="dropdown-item country-filter-item">
+                    <input type="checkbox" name={country} 
+                        checked={countryCheckBoxsState[country]} 
+                        onChange={hanldeCountryCheckBoxsChange} 
+                    />
+                    {country}
+                </div>
+            )
+            setCountryDropdownItems(countryItems)
+            return null
+        })
+    }, [countryCheckBoxsState])
+
+    useEffect(() => {
+        let sortItems = []
+        sorts.map((sort, index) => {
+            sortItems.push(
+                <div key={index} className="dropdown-item sort-filter-item">
+                    <input type="radio" name="sort"
+                        key={index}
+                        checked={sortCheckBoxsState.sortType === sort}
+                        value={sort} 
+                        onChange={hanldeSortCheckBoxsChange} 
+                    />
+                    {sort}
+                </div>
+            )
+            setSortDropdownItems(sortItems)
+            return null
+        })
+    }, [sortCheckBoxsState])
 
     useEffect(() => {
         if (props.genres.length > 0) {
@@ -130,7 +236,7 @@ export function FilterBar(props) {
             setGenreDropdownItems(items)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.genres])
+    }, [props.genres, genreCheckBoxsState])
 
     useEffect(() => {
         const genresChecked = getChecked(genreCheckBoxsState)    
@@ -144,12 +250,14 @@ export function FilterBar(props) {
                 setGenreValueText(`${genresChecked} selected`)
             }
         }
+
+        const checkedGenres = getCheckedArray(genreCheckBoxsState)
+        props.actions.setFilterOptions({ ...props.filterOptions, genres: checkedGenres })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [genreCheckBoxsState])
 
     useEffect(() => {
         const yearsChecked = getChecked(yearCheckBoxsState)    
-        console.log("checked = " + yearsChecked)
         if (yearsChecked === 0) {
             setYearValueText('All')
         } else {
@@ -160,12 +268,14 @@ export function FilterBar(props) {
                 setYearValueText(`${yearsChecked} selected`)
             }
         }
+
+        const checkedYears = getCheckedArray(yearCheckBoxsState)
+        props.actions.setFilterOptions({ ...props.filterOptions, years: checkedYears })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [yearCheckBoxsState])
 
     useEffect(() => {
         const countryChecked = getChecked(countryCheckBoxsState)    
-        console.log("checked = " + countryChecked)
         if (countryChecked === 0) {
             setCountryValueText('All')
         } else {
@@ -176,8 +286,16 @@ export function FilterBar(props) {
                 setCountryValueText(`${countryChecked} selected`)
             }
         }
+
+        const checkedCountries = getCheckedArray(countryCheckBoxsState)
+        props.actions.setFilterOptions({ ...props.filterOptions, countries: checkedCountries })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [countryCheckBoxsState])
+
+    useEffect(() => {
+        const sortValue = sortCheckBoxsState.sortType
+        props.actions.setFilterOptions({ ...props.filterOptions, sort: sortValue })
+    }, [sortCheckBoxsState])
 
     return (
         <div className="filter-bar-wrapper">
@@ -220,7 +338,7 @@ export function FilterBar(props) {
                     </DropdownMenu>
                 </UncontrolledDropdown>
                 <NavItem>
-                    <Button color="info"><TiFilter /> Filter</Button>
+                    <Button color="info" className="clear-filter-button"><RiFilterOffFill />Clear Filter</Button>
                 </NavItem>
             </Nav>
         </div>
@@ -229,10 +347,17 @@ export function FilterBar(props) {
 
 function mapStateToProps(state) {
     return {
-        genres: state.genres.length === 0 
-            ? [] 
-            : state.genres
+        genres: state.genres.length === 0 ? [] : state.genres,
+        filterOptions: state.filterbar
     }
 }
 
-export default connect(mapStateToProps)(FilterBar)
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: {
+            setFilterOptions: bindActionCreators(filterbarActions.setFilterOptions, dispatch)
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterBar)

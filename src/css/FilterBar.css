@@ -68,3 +68,13 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+.clear-filter-button {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.clear-filter-button svg {
+    margin-right: 0.3rem;
+}
