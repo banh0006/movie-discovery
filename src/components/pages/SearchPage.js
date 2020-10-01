@@ -68,21 +68,21 @@ export function SearchPage(props) {
         return axios.get(url)
     }
 
-    const getGenreIdsFromNames = (genreNames) => {
-        let genreIds = []
-        if (genreNames.length === 0) return genreIds
+    // const getGenreIdsFromNames = (genreNames) => {
+    //     let genreIds = []
+    //     if (genreNames.length === 0) return genreIds
 
-        props.genres.map(genre => {
-            for(let genreName of genreNames) {
-                if (genre.name === genreName) {
-                    genreIds.push(genre.id)
-                }
-            }
-            return null
-        })
+    //     props.genres.map(genre => {
+    //         for(let genreName of genreNames) {
+    //             if (genre.name === genreName) {
+    //                 genreIds.push(genre.id)
+    //             }
+    //         }
+    //         return null
+    //     })
         
-        return genreIds
-    }
+    //     return genreIds
+    // }
 
     
 
@@ -198,15 +198,13 @@ export function SearchPage(props) {
     }, [props.location.state])
 
     useEffect(() => {
-        console.log("filter options changed")
         if (movies.length > 0) {
             let sortType = "Default"
             if (props.filterOptions.sort) {
                 sortType = props.filterOptions.sort
             }
 
-            const genreIds = getGenreIdsFromNames(props.filterOptions.genres)
-            console.log(genreIds)
+            const genreIds = filterFunctions.getGenreIdsFromNames(props.filterOptions.genres, props.genres)
             let filteredMovieList = 
                 movies
                     .filter(filterFunctions.filterGenre.bind(this, genreIds))
@@ -215,7 +213,6 @@ export function SearchPage(props) {
 
             filteredMovieList = filterFunctions.sortMovies(filteredMovieList, sortType)
             setFilteredMovies(filteredMovieList)
-            console.log(filteredMovieList)
         }
         
     }, [props.filterOptions])

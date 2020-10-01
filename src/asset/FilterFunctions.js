@@ -27,6 +27,22 @@ const getYearStringFromDate = (dateString) => {
     return dateString.substring(0, 4)
 }
 
+export const getGenreIdsFromNames = (genreNames, allGenres) => {
+    let genreIds = []
+    if (genreNames.length === 0) return genreIds
+
+    allGenres.map(genre => {
+        for(let genreName of genreNames) {
+            if (genre.name === genreName) {
+                genreIds.push(genre.id)
+            }
+        }
+        return null
+    })
+    
+    return genreIds
+}
+
 export const getLanguageCodesFromCountryNames = (countries) => {
     const languageCodes = []
     countries.map(country => {  
