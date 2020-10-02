@@ -57,6 +57,10 @@ a.dark.navbar-brand {
     animation:  showNavBar 0.3s 1;
 }
 
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff !important;
+}
+
 .nav-hide {
     visibility: hidden;
     animation: hideNavBar 0.3s 1;

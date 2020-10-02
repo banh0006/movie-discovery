@@ -46,10 +46,13 @@ export function RecommendedMovies(props) {
     }, [movies])
 
     return (
+        <>
+            <h2>You may also like</h2>
 
-        <div> 
-            {swiperCards}
-        </div>
+            <div> 
+                {swiperCards}
+            </div>
+        </>
     )
 }
 

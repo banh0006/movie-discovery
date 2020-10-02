@@ -29,7 +29,8 @@ export function MovieDetails(props) {
     const getDirectorName = () => {
         if (movieCredits.crew) {
             const director = movieCredits.crew.find(crewMember => crewMember.job === "Director")
-            return director.name
+            if (director) return director.name
+            else return "Not found"
         }
     }
 
@@ -175,7 +176,6 @@ export function MovieDetails(props) {
             </Row>
             <Row className="recommendation">
                 <Col>
-                    <h2>You may also like</h2>
                     <div className="recommmended movies">
                         <RecommendedMovies movieId={movie.id} />    
                     </div> 
