@@ -11,7 +11,7 @@ import '../../css/Home.css'
 
 export function Home(props) {
     const styles = {
-        recommendedSection: {
+        sectionContainer: {
             'margin-top': '2rem'
         }
     }
@@ -28,10 +28,10 @@ export function Home(props) {
             <Row>
                 <MovieCarousel />
             </Row>
-            <Row style={styles.recommendedSection}>
+            <Row style={styles.sectionContainer}>
                 <MovieSection sectionName={sectionNames.RECOMMENDED_MOVIES} />
             </Row>
-            <Row>
+            <Row style={styles.sectionContainer}>
                 <MovieSection sectionName={sectionNames.UPCOMING_MOVIES} />
             </Row>
         </Container>

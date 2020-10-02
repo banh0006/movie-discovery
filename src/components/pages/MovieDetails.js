@@ -6,6 +6,7 @@ import { BASE_URL, DETAILS_URL, API_KEY, MOVIE_IMAGE_URL, YOUTUBE_VIDEO_URL } fr
 import { TiStar } from 'react-icons/ti'
 import { BsClock } from 'react-icons/bs'
 import '../../css/MovieDetails.css'
+import RecommendedMovies from '../organisms/RecommendedMovies'
 
 import axios from 'axios'
 import { connect } from 'react-redux'
@@ -83,7 +84,6 @@ export function MovieDetails(props) {
 
     const getTrailers = (movieId) => {
         let url = BASE_URL + DETAILS_URL + movieId + "/videos?api_key=" + API_KEY
-        // let url = "https://api.themoviedb.org/3/movie/337401/videos?api_key=323c169d6502f84d4a8a225e5732db2c"
         axios.get(url)
             .then(response => {
                 if (response.status === 200) {
@@ -96,6 +96,9 @@ export function MovieDetails(props) {
                 throw new Error("Network response was not ok.")
             })
             .then(data => {
+                if (data.results.length === 0) {
+                    setTrailer({})
+                } 
                 const officialTrailer = data.results.find(trailer => trailer.name === "Official Trailer")
                 if (officialTrailer) {
                     setTrailer(officialTrailer)
@@ -114,7 +117,7 @@ export function MovieDetails(props) {
         getMovieCredits(movieId)
         getTrailers(movieId)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [props.match.params.id])
 
     useEffect(() => {
         if (movie.genres) {
@@ -164,13 +167,18 @@ export function MovieDetails(props) {
                 </Col>
             </Row>
             <Row className="trailer">
-                <Col sm="12" xs="11" md="12" lg="9" className="trailer-container">
-                    <iframe src={trailer.key ? YOUTUBE_VIDEO_URL + trailer.key : null}  title={movie.title}/>
-                </Col>
+                { trailer  && 
+                    <Col sm="12" xs="11" md="12" lg="9" className="trailer-container">
+                        <iframe src={trailer.key ? YOUTUBE_VIDEO_URL + trailer.key : null}  title={movie.title}/>
+                    </Col>
+                }
             </Row>
             <Row className="recommendation">
                 <Col>
                     <h2>You may also like</h2>
+                    <div className="recommmended movies">
+                        <RecommendedMovies movieId={movie.id} />    
+                    </div> 
                 </Col>
             </Row>
         </Container>
