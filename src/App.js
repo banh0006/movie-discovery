@@ -70,7 +70,7 @@ function App(props) {
   }, [props.homepage])
 
   return (
-    <Router>
+    <Router basename="/movie-discovery">
       <div className="App">
         <Navbar showNav={showNav} isTransparent={transparentNav} />
         <Switch>
