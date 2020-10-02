@@ -6,8 +6,10 @@ export const UPCOMING_URL = "movie/upcoming?api_key="
 export const POPULAR_URL = 'movie/popular?api_key='
 export const TOP_RATED_URL = 'movie/top_rated?api_key='
 export const SEARCH_URL = 'search/movie?api_key='
+export const DETAILS_URL = 'movie/'
 export const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w1280'
 export const MOVIE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500'
+export const YOUTUBE_VIDEO_URL = 'https://www.youtube.com/embed/'
 
 export const sectionNames = {
     RECOMMENDED_MOVIES: "Recommend Movies",

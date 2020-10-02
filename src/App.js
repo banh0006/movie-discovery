@@ -76,7 +76,7 @@ function App(props) {
         <Switch>
           <Route path="/popular" component={PopularMovies} />
           <Route path="/toprated" component={TopRatedMovies} />
-          <Route path="/details" component={MovieDetails} />
+          <Route path="/details/:id" component={MovieDetails} />
           <Route path='/search' component={SearchPage} />
           <Route path="/" component={Home} />
         </Switch>

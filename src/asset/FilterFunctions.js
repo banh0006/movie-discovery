@@ -1,6 +1,8 @@
 export const getLanguageCode = (countryName) => {
     switch (countryName) {
-        case "United States", "Canada", "United Kingdom": 
+        case "United States":
+        case "Canada":
+        case "United Kingdom": 
             return "en"
         case "France":
             return "fr"
@@ -12,7 +14,8 @@ export const getLanguageCode = (countryName) => {
             return "ko"
         case "Japan":
             return "ja"
-        case "HongKong", "China":
+        case "Hongkong":
+        case "China":
             return "zh"
         case "Brazil":
             return "pt"
@@ -47,6 +50,7 @@ export const getLanguageCodesFromCountryNames = (countries) => {
     const languageCodes = []
     countries.map(country => {  
         languageCodes.push(getLanguageCode(country))
+        return null
     })
     return languageCodes
 }

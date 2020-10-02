@@ -109,7 +109,7 @@ export function SearchPage(props) {
             filteredMovieList = filterFunctions.sortMovies(filteredMovieList, sortType)
             setFilteredMovies(filteredMovieList)
         }
-        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.filterOptions])
 
     return (

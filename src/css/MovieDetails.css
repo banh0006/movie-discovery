@@ -1,0 +1,56 @@
+#movie-details {
+    background-color: #141414;
+    color: #fff;
+}
+
+.movie-detail-img {
+    width: 100%;
+}
+
+.movie-details-info {
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 4rem;
+}
+
+.movie-detail-view {
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.movie-detail-view svg {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.movie-detail-overview {
+    margin: 1rem 0;
+}
+
+.movie-duration {
+    margin: 0 1rem;
+}
+.movie-detail-release_date, .movie-detail-genre, .movie-detail-director {
+    margin: 0.5rem 0;
+}
+
+.cast-text {
+    margin: 0.5rem 0 1rem 0;
+}
+
+.trailer {
+    justify-content: center;
+}
+
+.trailer-container {
+    
+}
+
+.trailer iframe {
+    width: 100%;
+    height: 45vw;
+}
+
+.recommendation {
+    margin: 2rem 1rem;
+}

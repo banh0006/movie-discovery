@@ -70,14 +70,14 @@ export function FilterBar(props) {
         return checkedArray
     }
 
-    const unCheck = (obj) => {
-        let newObj = {}
-        Object.keys(obj).map(key => {
-            newObj = { ...newObj, [key]: false}
-        })
+    // const unCheck = (obj) => {
+    //     let newObj = {}
+    //     Object.keys(obj).map(key => {
+    //         newObj = { ...newObj, [key]: false}
+    //     })
 
-        return newObj
-    }
+    //     return newObj
+    // }
 
     // const clearFilter = () => {
     //     setGenreValueText('All')
@@ -180,6 +180,7 @@ export function FilterBar(props) {
             setYearDropdownItems(yearItems)
             return null
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [yearCheckBoxsState])
 
     useEffect(() => {
@@ -197,6 +198,7 @@ export function FilterBar(props) {
             setCountryDropdownItems(countryItems)
             return null
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [countryCheckBoxsState])
 
     useEffect(() => {
@@ -216,6 +218,7 @@ export function FilterBar(props) {
             setSortDropdownItems(sortItems)
             return null
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortCheckBoxsState])
 
     useEffect(() => {
@@ -295,6 +298,7 @@ export function FilterBar(props) {
     useEffect(() => {
         const sortValue = sortCheckBoxsState.sortType
         props.actions.setFilterOptions({ ...props.filterOptions, sort: sortValue })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortCheckBoxsState])
 
     return (
