@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/movie-discovery/static/css/main.e23a0b64.chunk.css",
-    "main.js": "/movie-discovery/static/js/main.9136354a.chunk.js",
-    "main.js.map": "/movie-discovery/static/js/main.9136354a.chunk.js.map",
+    "main.css": "/movie-discovery/static/css/main.dc27ac7d.chunk.css",
+    "main.js": "/movie-discovery/static/js/main.3102ed1d.chunk.js",
+    "main.js.map": "/movie-discovery/static/js/main.3102ed1d.chunk.js.map",
     "runtime-main.js": "/movie-discovery/static/js/runtime-main.a6258db4.js",
     "runtime-main.js.map": "/movie-discovery/static/js/runtime-main.a6258db4.js.map",
-    "static/css/2.d9ad5f5c.chunk.css": "/movie-discovery/static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.0c0fcd23.chunk.js": "/movie-discovery/static/js/2.0c0fcd23.chunk.js",
-    "static/js/2.0c0fcd23.chunk.js.map": "/movie-discovery/static/js/2.0c0fcd23.chunk.js.map",
+    "static/css/2.a2211c7b.chunk.css": "/movie-discovery/static/css/2.a2211c7b.chunk.css",
+    "static/js/2.4d69757a.chunk.js": "/movie-discovery/static/js/2.4d69757a.chunk.js",
+    "static/js/2.4d69757a.chunk.js.map": "/movie-discovery/static/js/2.4d69757a.chunk.js.map",
     "index.html": "/movie-discovery/index.html",
-    "precache-manifest.3c6601de13cd4c189911f84062d64538.js": "/movie-discovery/precache-manifest.3c6601de13cd4c189911f84062d64538.js",
+    "precache-manifest.c792cc81204b88cbe686be52b75d16b1.js": "/movie-discovery/precache-manifest.c792cc81204b88cbe686be52b75d16b1.js",
     "service-worker.js": "/movie-discovery/service-worker.js",
-    "static/css/2.d9ad5f5c.chunk.css.map": "/movie-discovery/static/css/2.d9ad5f5c.chunk.css.map",
-    "static/css/main.e23a0b64.chunk.css.map": "/movie-discovery/static/css/main.e23a0b64.chunk.css.map",
-    "static/js/2.0c0fcd23.chunk.js.LICENSE.txt": "/movie-discovery/static/js/2.0c0fcd23.chunk.js.LICENSE.txt"
+    "static/css/2.a2211c7b.chunk.css.map": "/movie-discovery/static/css/2.a2211c7b.chunk.css.map",
+    "static/css/main.dc27ac7d.chunk.css.map": "/movie-discovery/static/css/main.dc27ac7d.chunk.css.map",
+    "static/js/2.4d69757a.chunk.js.LICENSE.txt": "/movie-discovery/static/js/2.4d69757a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a6258db4.js",
-    "static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.0c0fcd23.chunk.js",
-    "static/css/main.e23a0b64.chunk.css",
-    "static/js/main.9136354a.chunk.js"
+    "static/css/2.a2211c7b.chunk.css",
+    "static/js/2.4d69757a.chunk.js",
+    "static/css/main.dc27ac7d.chunk.css",
+    "static/js/main.3102ed1d.chunk.js"
   ]
 }
