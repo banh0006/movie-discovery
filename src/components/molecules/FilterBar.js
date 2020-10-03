@@ -21,7 +21,7 @@ export function FilterBar(props) {
     const [yearCheckBoxsState, setYearCheckBoxsState] = useState([])
     const [countryCheckBoxsState, setCountryCheckBoxsState] = useState([])
     const [sortCheckBoxsState, setSortCheckBoxsState] = useState({sortType: 'Default'})
-
+    const [isClearingFilter, setIsClearingFilter] = useState(false)
     const [genreValueText, setGenreValueText] = useState('All')
     const [yearValueText, setYearValueText] = useState('All')
     const [countryValueText, setCountryValueText] = useState('All')
@@ -70,6 +70,7 @@ export function FilterBar(props) {
     }
 
     const clearFilter = async() => {
+        setIsClearingFilter(true)
         if (getObjLength(yearCheckBoxsState) > 0) {
             let newYearState = unCheck(yearCheckBoxsState)
             await setYearCheckBoxsState(newYearState)
@@ -89,6 +90,7 @@ export function FilterBar(props) {
 
         // use await to make sure there is no useEffect change redux store
         props.actions.clearFilter()
+        setIsClearingFilter(false)
     }
 
     const unCheck = (obj) => {
@@ -168,6 +170,11 @@ export function FilterBar(props) {
             return null
         })
 
+        if (isClearingFilter) {
+            setYearValueText('All')
+            return 
+        }
+
         const yearsChecked = getChecked(yearCheckBoxsState)    
         if (yearsChecked === 0) {
             setYearValueText('All')
@@ -200,6 +207,11 @@ export function FilterBar(props) {
             setCountryDropdownItems(countryItems)
             return null
         })
+
+        if (isClearingFilter) {
+            setCountryValueText('All')
+            return
+        }
 
         const countryChecked = getChecked(countryCheckBoxsState)    
         if (countryChecked === 0) {
@@ -235,6 +247,11 @@ export function FilterBar(props) {
             return null
         })
 
+        if (isClearingFilter) {
+            setSortValueText('Default')
+            return
+        }
+
         const sortValue = sortCheckBoxsState.sortType
         setSortValueText(sortValue)
         props.actions.setFilterOptions({ ...props.filterOptions, sort: sortValue })
@@ -259,6 +276,11 @@ export function FilterBar(props) {
             setGenreDropdownItems(items)
         }
 
+        if (isClearingFilter) {
+            setGenreValueText('All')
+            return 
+        }
+
         const genresChecked = getChecked(genreCheckBoxsState)    
         if (genresChecked === 0) {
             setGenreValueText('All')
@@ -275,11 +297,6 @@ export function FilterBar(props) {
         props.actions.setFilterOptions({ ...props.filterOptions, genres: checkedGenres })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.genres, genreCheckBoxsState])
-
-    useEffect(() => {
-        
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [genreCheckBoxsState])
 
     return (
         <div className="filter-bar-wrapper">
