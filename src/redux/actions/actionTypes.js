@@ -3,6 +3,7 @@ export const LOAD_GENRES_SUCCESS = "LOAD_GENRES_SUCCESS"
 export const SET_HOME_PAGE = "SET_HOME_PAGE"
 
 export const SET_FILTER_OPTION = "SET_FILTER_OPTION"
+export const CLEAR_FILTER = "CLEAR_FILTER"
 
 // #region movie actions
 

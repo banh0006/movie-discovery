@@ -38,11 +38,39 @@ export function TopRatedMovies(props) {
         }
     }
 
+    const filterMovies = () => {
+        if (movies.length > 0) {
+            let filteredMovieList = movies
+            let sortType = "Default"
+            if (props.filterOptions.sort) {
+                sortType = props.filterOptions.sort
+            }
+
+            if (props.filterOptions.genres.length > 0) {
+                const genreIds = filterFunctions.getGenreIdsFromNames(props.filterOptions.genres, props.genres)
+                filteredMovieList = filteredMovieList.filter(filterFunctions.filterGenre.bind(this, genreIds))
+            }
+
+            if (props.filterOptions.years.length > 0) {
+                filteredMovieList = filteredMovieList.filter(filterFunctions.filterYear.bind(this, props.filterOptions.years))
+            }
+
+            if (props.filterOptions.countries.length > 0) {
+                filteredMovieList = filteredMovieList.filter(filterFunctions.filterCountry.bind(this, props.filterOptions.countries))
+            }
+
+            filteredMovieList = filterFunctions.sortMovies(filteredMovieList, sortType)
+            setFilteredMovies(filteredMovieList)
+        }
+    }
+
     useEffect(() => {
         props.actions.setHomePage(false)
         if (movies.length === 0) {
             props.actions.loadTopRatedMovies()
         }
+
+        filterMovies()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -53,22 +81,7 @@ export function TopRatedMovies(props) {
     }, [props.topRatedMovies])
 
     useEffect(() => {
-        if (movies.length > 0) {
-            let sortType = "Default"
-            if (props.filterOptions.sort) {
-                sortType = props.filterOptions.sort
-            }
-
-            const genreIds = filterFunctions.getGenreIdsFromNames(props.filterOptions.genres, props.genres)
-            let filteredMovieList = 
-                movies
-                    .filter(filterFunctions.filterGenre.bind(this, genreIds))
-                    .filter(filterFunctions.filterYear.bind(this, props.filterOptions.years))
-                    .filter(filterFunctions.filterCountry.bind(this, props.filterOptions.countries))
-
-            filteredMovieList = filterFunctions.sortMovies(filteredMovieList, sortType)
-            setFilteredMovies(filteredMovieList)
-        }
+        filterMovies()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.filterOptions])
 

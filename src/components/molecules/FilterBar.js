@@ -45,7 +45,6 @@ export function FilterBar(props) {
     const hanldeSortCheckBoxsChange = (event) => {
         const { value } = event.target
         setSortCheckBoxsState(prevState => ({ ...prevState, "sortType": value }))
-        setSortValueText(value)
     }
 
     const getObjLength = (obj) => {
@@ -70,49 +69,36 @@ export function FilterBar(props) {
         return checkedArray
     }
 
-    // const unCheck = (obj) => {
-    //     let newObj = {}
-    //     Object.keys(obj).map(key => {
-    //         newObj = { ...newObj, [key]: false}
-    //     })
+    const clearFilter = async() => {
+        if (getObjLength(yearCheckBoxsState) > 0) {
+            let newYearState = unCheck(yearCheckBoxsState)
+            await setYearCheckBoxsState(newYearState)
+        }
+        
+        if (getObjLength(countryCheckBoxsState) > 0) {
+            let newCountryState = unCheck(countryCheckBoxsState)
+            await setCountryCheckBoxsState(newCountryState)
+        }
+        
+        if (getObjLength(genreCheckBoxsState) > 0) {
+            let newGenreState = unCheck(genreCheckBoxsState)
+            await setGenreCheckBoxsState(newGenreState)
+        }
 
-    //     return newObj
-    // }
+        await setSortCheckBoxsState({sortType: 'Default'})
 
-    // const clearFilter = () => {
-    //     setGenreValueText('All')
-    //     setYearValueText('All')
-    //     setCountryValueText('All')
-    //     setSortValueText('Default')
-    //     // setGenreCheckBoxsState([])
-    //     // setYearCheckBoxsState([])
-    //     // setCountryCheckBoxsState([])
-    //     setSortCheckBoxsState({sortType: 'Default'})
-    //     if (getObjLength(genreCheckBoxsState) > 0) {
-    //         let newGenreState = unCheck(genreCheckBoxsState)
-    //         console.log(newGenreState)
-    //         setGenreCheckBoxsState(newGenreState)
-    //     }
-    //     if (getObjLength(yearCheckBoxsState) > 0) {
-    //         let newYearState = unCheck(yearCheckBoxsState)
-    //         console.log(newYearState)
-    //         setYearCheckBoxsState(newYearState)
-    //     }
-    //     if (getObjLength(countryCheckBoxsState) > 0) {
-    //         let newCountryState = unCheck(countryCheckBoxsState)
-    //         console.log(countryCheckBoxsState)
-    //         setCountryCheckBoxsState(newCountryState)
-    //     }
+        // use await to make sure there is no useEffect change redux store
+        props.actions.clearFilter()
+    }
 
-    //     console.log("clear filter trigger")
-    //     // props.actions.setFilterOptions({ 
-    //     //     ...props.filterOptions,
-    //     //     genres: [],
-    //     //     years: [],
-    //     //     countries: [],
-    //     //     // sort: 'Default' 
-    //     // })
-    // }
+    const unCheck = (obj) => {
+        let newObj = {}
+        Object.keys(obj).map(key => {
+            newObj = { ...newObj, [key]: false}
+        })
+
+        return newObj
+    }
 
     useEffect(() => {
         let countryItems = []
@@ -149,6 +135,7 @@ export function FilterBar(props) {
             sortItems.push(
                 <div key={index} className="dropdown-item sort-filter-item">
                     <input type="radio" name="sort"
+                        checked={props.filterOptions.sort===sort}
                         key={index}
                         value={sort} 
                         onChange={hanldeSortCheckBoxsChange} 
@@ -180,6 +167,21 @@ export function FilterBar(props) {
             setYearDropdownItems(yearItems)
             return null
         })
+
+        const yearsChecked = getChecked(yearCheckBoxsState)    
+        if (yearsChecked === 0) {
+            setYearValueText('All')
+        } else {
+            if (yearsChecked === 1) {
+                let year = getCheckedValue(yearCheckBoxsState)
+                setYearValueText(year)
+            } else {
+                setYearValueText(`${yearsChecked} selected`)
+            }
+        }
+
+        const checkedYears = getCheckedArray(yearCheckBoxsState)
+        props.actions.setFilterOptions({ ...props.filterOptions, years: checkedYears })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [yearCheckBoxsState])
 
@@ -198,6 +200,20 @@ export function FilterBar(props) {
             setCountryDropdownItems(countryItems)
             return null
         })
+
+        const countryChecked = getChecked(countryCheckBoxsState)    
+        if (countryChecked === 0) {
+            setCountryValueText('All')
+        } else {
+            if (countryChecked === 1) {
+                let year = getCheckedValue(countryCheckBoxsState)
+                setCountryValueText(year)
+            } else {
+                setCountryValueText(`${countryChecked} selected`)
+            }
+        }
+        const checkedCountries = getCheckedArray(countryCheckBoxsState)
+        props.actions.setFilterOptions({ ...props.filterOptions, countries: checkedCountries })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [countryCheckBoxsState])
 
@@ -218,6 +234,10 @@ export function FilterBar(props) {
             setSortDropdownItems(sortItems)
             return null
         })
+
+        const sortValue = sortCheckBoxsState.sortType
+        setSortValueText(sortValue)
+        props.actions.setFilterOptions({ ...props.filterOptions, sort: sortValue })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortCheckBoxsState])
 
@@ -238,10 +258,7 @@ export function FilterBar(props) {
             })
             setGenreDropdownItems(items)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.genres, genreCheckBoxsState])
 
-    useEffect(() => {
         const genresChecked = getChecked(genreCheckBoxsState)    
         if (genresChecked === 0) {
             setGenreValueText('All')
@@ -257,49 +274,12 @@ export function FilterBar(props) {
         const checkedGenres = getCheckedArray(genreCheckBoxsState)
         props.actions.setFilterOptions({ ...props.filterOptions, genres: checkedGenres })
         // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.genres, genreCheckBoxsState])
+
+    useEffect(() => {
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [genreCheckBoxsState])
-
-    useEffect(() => {
-        const yearsChecked = getChecked(yearCheckBoxsState)    
-        if (yearsChecked === 0) {
-            setYearValueText('All')
-        } else {
-            if (yearsChecked === 1) {
-                let year = getCheckedValue(yearCheckBoxsState)
-                setYearValueText(year)
-            } else {
-                setYearValueText(`${yearsChecked} selected`)
-            }
-        }
-
-        const checkedYears = getCheckedArray(yearCheckBoxsState)
-        props.actions.setFilterOptions({ ...props.filterOptions, years: checkedYears })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [yearCheckBoxsState])
-
-    useEffect(() => {
-        const countryChecked = getChecked(countryCheckBoxsState)    
-        if (countryChecked === 0) {
-            setCountryValueText('All')
-        } else {
-            if (countryChecked === 1) {
-                let year = getCheckedValue(countryCheckBoxsState)
-                setCountryValueText(year)
-            } else {
-                setCountryValueText(`${countryChecked} selected`)
-            }
-        }
-
-        const checkedCountries = getCheckedArray(countryCheckBoxsState)
-        props.actions.setFilterOptions({ ...props.filterOptions, countries: checkedCountries })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [countryCheckBoxsState])
-
-    useEffect(() => {
-        const sortValue = sortCheckBoxsState.sortType
-        props.actions.setFilterOptions({ ...props.filterOptions, sort: sortValue })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortCheckBoxsState])
 
     return (
         <div className="filter-bar-wrapper">
@@ -342,7 +322,7 @@ export function FilterBar(props) {
                     </DropdownMenu>
                 </UncontrolledDropdown>
                 <NavItem>
-                    <Button color="info" className="clear-filter-button"><RiFilterOffFill />Clear Filter</Button>
+                    <Button color="info" className="clear-filter-button" onClick={clearFilter} ><RiFilterOffFill />Clear Filter</Button>
                 </NavItem>
             </Nav>
         </div>
@@ -359,7 +339,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            setFilterOptions: bindActionCreators(filterbarActions.setFilterOptions, dispatch)
+            setFilterOptions: bindActionCreators(filterbarActions.setFilterOptions, dispatch),
+            clearFilter: bindActionCreators(filterbarActions.clearFilter, dispatch)
         }
     }
 }
