@@ -25,6 +25,9 @@ export function PopularMovies(props) {
         pageContainer: {
             'padding-top': '8rem'
         },
+        pageTitle: {
+            'margin': '0rem 1rem 2rem 1rem'
+        },
         popularMovieContainer: {
             'margin': '0 1rem',
             'width': '100%'
@@ -71,6 +74,11 @@ export function PopularMovies(props) {
 
     return (
         <Container id="popular-movies" style={styles.pageContainer}>
+            <Row className="page-title">
+                <h2 style={styles.pageTitle}>
+                    Popular movies
+                </h2>
+            </Row>
             <Row className="filter-bar">
                 <FilterBar />
             </Row>
