@@ -13,7 +13,6 @@ export function RecommendedMovies(props) {
         axios.get(url)
             .then(response => {
                 if (response.status === 200) {
-                    console.log(response.data)
                     return response.data
                 }
                 if (response.status === 400) {

@@ -96,7 +96,7 @@ export function FilterBar(props) {
     const unCheck = (obj) => {
         let newObj = {}
         Object.keys(obj).map(key => {
-            newObj = { ...newObj, [key]: false}
+            return newObj = { ...newObj, [key]: false}
         })
 
         return newObj

@@ -24,7 +24,7 @@ export function PopularMovies(props) {
 
     const styles = {
         pageContainer: {
-            'padding-top': '8rem'
+            'paddingTop': '8rem'
         },
         pageTitle: {
             'margin': '0rem 1rem 2rem 1rem'
@@ -90,8 +90,11 @@ export function PopularMovies(props) {
                 </div>
             </Row>
             <Row className="pagination-bar" style={styles.paginationBar}>
-                <PaginationBar moviesPerPage={moviesPerPage} totalMovies={filteredMovies.length} 
+                {
+                    filteredMovies.length > 0 && 
+                    <PaginationBar moviesPerPage={moviesPerPage} totalMovies={filteredMovies.length} 
                     currentPage={currentPage} paginate={paginate} link="#popular-movies" />
+                }
             </Row>
         </Container>
     )

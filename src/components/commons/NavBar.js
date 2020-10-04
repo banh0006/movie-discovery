@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Navbar, NavbarToggler, Collapse, Nav, NavItem,
-    UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap'
+    UncontrolledDropdown, DropdownToggle, DropdownMenu } from 'reactstrap'
 import '../../css/NavBar.css'
 import InputSearch from '../atoms/InputSearch'
 import * as genreActions from '../../redux/actions/genreActions'
@@ -32,9 +32,9 @@ export function NavBar(props) {
         let items = []
         countries.map((country, index) => {
             items.push(
-                <DropdownItem key={index}>
+                <NavLink to={`/movies/country/${country}`} className="dropdown-item country" key={index}>
                     {country}
-                </DropdownItem>
+                </NavLink>
             )
             return null
         })
@@ -47,9 +47,9 @@ export function NavBar(props) {
             let items = []
             props.genres.map((genre, index) => {
                 items.push(
-                    <DropdownItem key={index}>
+                    <NavLink to={`/movies/genre/${genre.name}`} className="dropdown-item genre" key={index} >
                         {genre.name}
-                    </DropdownItem>
+                    </NavLink>
                 )
                 return null
             })

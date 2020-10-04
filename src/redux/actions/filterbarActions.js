@@ -7,3 +7,11 @@ export function setFilterOptions(options) {
 export function clearFilter() {
     return { type: actionTypes.CLEAR_FILTER }
 }
+
+export function setGenre(genre) {
+    return { type: actionTypes.SET_GENRE, genre }
+}
+
+export function setCountry(country) {
+    return { type: actionTypes.SET_COUNTRY, country }
+}

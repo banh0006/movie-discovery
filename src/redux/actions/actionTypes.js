@@ -4,6 +4,8 @@ export const SET_HOME_PAGE = "SET_HOME_PAGE"
 
 export const SET_FILTER_OPTION = "SET_FILTER_OPTION"
 export const CLEAR_FILTER = "CLEAR_FILTER"
+export const SET_GENRE = "SET_GENRE"
+export const SET_COUNTRY = "SET_COUNTRY"
 
 // #region movie actions
 

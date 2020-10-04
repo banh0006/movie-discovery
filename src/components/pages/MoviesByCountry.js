@@ -3,19 +3,19 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Container, Row } from 'reactstrap'
 import * as navbarActions from '../../redux/actions/navbarActions'
-import * as filterFunctions from '../../asset/FilterFunctions'
 import * as filterbarActions from '../../redux/actions/filterbarActions'
+import * as filterFunctions from '../../asset/FilterFunctions'
+import { BASE_URL, DISCOVER_URL, API_KEY } from '../../asset/GlobalData'
 import MovieList from '../molecules/MovieList'
 import FilterBar from '../molecules/FilterBar'
 import PaginationBar from '../molecules/PaginationBar'
 import axios from 'axios'
-import { BASE_URL, SEARCH_URL, API_KEY } from '../../asset/GlobalData'
 
-export function SearchPage(props) {
+export function MoviesByCountry(props) {
     const [movies, setMovies] = useState([])
     const [filteredMovies, setFilteredMovies] = useState([])
+
     const [currentPage, setCurrentPage] = useState(1)
-    const [searchString, setSearchString] = useState("")
     const moviesPerPage = 40
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
@@ -27,12 +27,12 @@ export function SearchPage(props) {
         pageContainer: {
             'paddingTop': '8rem'
         },
-        searchMovieContainer: {
+        pageTitle: {
+            'margin': '0rem 1rem 2rem 1rem'
+        },
+        countryMovieContainer: {
             'margin': '0 1rem',
             'width': '100%'
-        },
-        searchTitle: {
-            'margin': '0rem 1rem 2rem 1rem'
         },
         paginationBar: {
             'justifyContent': 'center',
@@ -40,13 +40,15 @@ export function SearchPage(props) {
         }
     }
 
-    const getSearchMovies = (searchString) => {
-        const getSearchMoviesFuncs = []
+    const getMoviesByCountry = (languageCode) => {
+        if (!languageCode) return 
+        
+        const getMoviesFuncs = []
         for (let i = 1; i <= 20; i++) {
-            getSearchMoviesFuncs.push(getSearchMoviesFromOnePage(i, searchString))
+            getMoviesFuncs.push(getMoviesByCountryFromOnePage(i, languageCode))
         }
 
-        Promise.all(getSearchMoviesFuncs)
+        Promise.all(getMoviesFuncs)
             .then(function (responses) {
                 const combinedData = []
                 responses.map(res => {
@@ -64,35 +66,20 @@ export function SearchPage(props) {
             }) 
     }
 
-    const getSearchMoviesFromOnePage = (pageNumber, searchString) => {
-        let url = BASE_URL + SEARCH_URL + API_KEY + `&query=${searchString}&page=${pageNumber}`
+    const getMoviesByCountryFromOnePage = (pageNumber, languageCode) => {
+        let url = BASE_URL + DISCOVER_URL + API_KEY + "&page=" + pageNumber + "&with_original_language=" + languageCode
         return axios.get(url)
     }
 
     useEffect(() => {
-        props.actions.setHomePage(false)
-        if (props.location.state) {
-            let searchQuery = props.location.state.searchString
-            setSearchString(searchQuery)
-            getSearchMovies(searchQuery)
-            if (movies.length === 0) {
-                getSearchMovies(searchQuery)
-            }
-        }
-        props.actions.clearFilter()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    useEffect(() => {
-        if (props.location.state) {
-            let searchQuery = props.location.state.searchString
-            if (searchQuery !== searchString) {
-                setSearchString(searchQuery)
-                getSearchMovies(searchQuery)
-            }
+        if (props.match.params.name) {
+            const countryName = props.match.params.name
+            const languageCode = filterFunctions.getLanguageCode(countryName)
+            getMoviesByCountry(languageCode)
+            props.actions.setCountry(countryName)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.location.state])
+    }, [props.match.params.name])
 
     useEffect(() => {
         if (movies.length > 0) {
@@ -115,29 +102,28 @@ export function SearchPage(props) {
     }, [props.filterOptions])
 
     return (
-        <Container id="search-movies" style={styles.pageContainer}>
-            <Row className="search-title">
-                <h2 style={styles.searchTitle}>
-                    {`Results for: ${searchString}`}
-                </h2>
-            </Row>
-            <Row className="filter-bar">
-                <FilterBar/>
-            </Row>
-            <Row className="search-movies">
-                <div className="search-movie-list" style={styles.searchMovieContainer}>
-                    <MovieList movieList={currentMovies} />
-                </div>
-            </Row>
-            <Row className="pagination-bar" style={styles.paginationBar}>
-                {filteredMovies.length > 0 && 
-                    (
-                        <PaginationBar moviesPerPage={moviesPerPage} totalMovies={filteredMovies.length} 
-                            currentPage={currentPage} paginate={paginate} link="#search-movies" />
-                    )
-                }
-            </Row>
-        </Container>
+        <Container id="movies-by-country" style={styles.pageContainer}>
+        <Row className="page-title">
+            <h2 style={styles.pageTitle}>
+                {props.match.params.name} Movies
+            </h2>
+        </Row>
+        <Row className="filter-bar">
+            <FilterBar />
+        </Row>
+        <Row className="movies-by-country">
+            <div className="movie-list-by-country" style={styles.countryMovieContainer}>
+                <MovieList movieList={currentMovies} redirect={true} />
+            </div>
+        </Row>
+        <Row className="pagination-bar" style={styles.paginationBar}>
+            {
+                filteredMovies.length > 0 &&
+                <PaginationBar moviesPerPage={moviesPerPage} totalMovies={filteredMovies.length} 
+                currentPage={currentPage} paginate={paginate} link="#movies-by-country" />
+            }
+        </Row>
+    </Container>
     )
 }
 
@@ -152,9 +138,10 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: {
             setHomePage: bindActionCreators(navbarActions.setHomepage, dispatch),
-            clearFilter: bindActionCreators(filterbarActions.clearFilter, dispatch)
+            clearFilter: bindActionCreators(filterbarActions.clearFilter, dispatch),
+            setCountry: bindActionCreators(filterbarActions.setCountry, dispatch)
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesByCountry)

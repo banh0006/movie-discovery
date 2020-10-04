@@ -13,6 +13,10 @@ export default function filterbarReducer(state = initialState, action) {
             return action.options
         case actionTypes.CLEAR_FILTER:
             return initialState
+        case actionTypes.SET_GENRE:
+            return { ...initialState, genres: [action.genre] }
+        case actionTypes.SET_COUNTRY:
+            return { ...initialState, countries: [action.country] }
         default:
             return state
     }

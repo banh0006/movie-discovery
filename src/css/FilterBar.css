@@ -63,6 +63,23 @@
     margin-right: 0.3rem;
 }
 
+.genre-filter-item:active,
+.year-filter-item:active,
+.country-filter-item:active,
+.sort-filter-item:active
+.genre-filter-item.active
+.year-filter-item.active
+.country-filter-item.active
+.sort-filter-item.active {
+    background-color: inherit !important;
+    color: #212529 !important;
+}
+
+.sort-filter-item:hover {
+    background-color: inherit !important;
+    color: #212529 !important;
+}
+
 .genre-value, .year-value, .country-value, .sort-value {
     margin-left: 0.3rem;
     font-weight: bold;

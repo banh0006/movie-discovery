@@ -11,10 +11,6 @@
     color: #fff !important;
 }
 
-.non-transparent .navbar-collapse .navbar-nav li a {
-    color: #fff !important;
-}
-
 .navbar-nav li.nav-item {
     max-width: 8rem;
     width: max-content;
@@ -65,6 +61,14 @@ a.dark.navbar-brand {
     visibility: hidden;
     animation: hideNavBar 0.3s 1;
     transition: visibility 0s 0.3s;
+}
+
+.navbar-nav .dropdown-item.active,.navbar-nav .dropdown-item:active {
+    background-color: #17a2b8 !important;
+}
+
+.navbar-nav .dropdown-item:focus, .navbar-nav .dropdown-item:hover {
+    color: #212529;
 }
 
 /**

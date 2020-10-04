@@ -123,7 +123,6 @@ export function MovieDetails(props) {
     useEffect(() => {
         if (movie.genres) {
             const genreNames = getGenreNames(movie.genres)
-            console.log(genreNames)
             setGenres(genreNames)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

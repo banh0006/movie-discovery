@@ -15,7 +15,6 @@ export function TopRatedMovies(props) {
     const [filteredMovies, setFilteredMovies] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const moviesPerPage = 40
-
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     const indexOfLastMovie = currentPage * moviesPerPage
@@ -24,7 +23,7 @@ export function TopRatedMovies(props) {
 
     const styles = {
         pageContainer: {
-            'padding-top': '8rem'
+            'paddingTop': '8rem'
         },
         pageTitle: {
             'margin': '0rem 1rem 2rem 1rem'
@@ -101,8 +100,11 @@ export function TopRatedMovies(props) {
                 </div>
             </Row>
             <Row className="pagination-bar" style={styles.paginationBar}>
-                <PaginationBar moviesPerPage={moviesPerPage} totalMovies={filteredMovies.length} 
+                {
+                    filteredMovies.length > 0 &&
+                    <PaginationBar moviesPerPage={moviesPerPage} totalMovies={filteredMovies.length} 
                     currentPage={currentPage} paginate={paginate} link="#top-rated-movies" />
+                }
             </Row>
         </Container>
     )

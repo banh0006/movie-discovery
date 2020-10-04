@@ -5,8 +5,8 @@ import 'swiper/swiper.scss'
 
 export default function SwiperMovies({ movies }) {
     const movieCards = movies.map(movie => (
-      <div>
-          <MovieCard key={movie.id} movie={movie} changeId={true} />
+      <div key={movie.id}>
+          <MovieCard movie={movie} changeId={true} />
       </div>
     ))
 

@@ -23,9 +23,15 @@ export function MovieCard(props) {
     return (
         <div className="card-container">
             <div className="image-card">
-                <Link to={props.changeId ? `${props.movie.id}` : `details/${props.movie.id}`} >
-                    <img className="movie-img" src={MOVIE_IMAGE_URL + props.movie.poster_path} alt={props.movie.title}/>
-                </Link>
+                { props.redirect 
+                    ?   <Link to={`/details/${props.movie.id}`}>
+                            <img className="movie-img" src={MOVIE_IMAGE_URL + props.movie.poster_path} alt={props.movie.title}/>
+                        </Link>
+                    :   <Link to={props.changeId ? `${props.movie.id}` : `details/${props.movie.id}`} >
+                            <img className="movie-img" src={MOVIE_IMAGE_URL + props.movie.poster_path} alt={props.movie.title}/>
+                        </Link>
+                }
+                
                 <div className="movie-info">
                     <TiInfoLarge color="#fff" />
                     <div className="info-text">
