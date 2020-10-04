@@ -224,6 +224,7 @@ export function FilterBar(props) {
                 setCountryValueText(`${countryChecked} selected`)
             }
         }
+
         const checkedCountries = getCheckedArray(countryCheckBoxsState)
         props.actions.setFilterOptions({ ...props.filterOptions, countries: checkedCountries })
         // eslint-disable-next-line react-hooks/exhaustive-deps

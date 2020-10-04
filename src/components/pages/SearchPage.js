@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Container, Row } from 'reactstrap'
 import * as navbarActions from '../../redux/actions/navbarActions'
 import * as filterFunctions from '../../asset/FilterFunctions'
+import * as filterbarActions from '../../redux/actions/filterbarActions'
 import MovieList from '../molecules/MovieList'
 import FilterBar from '../molecules/FilterBar'
 import PaginationBar from '../molecules/PaginationBar'
@@ -78,6 +79,7 @@ export function SearchPage(props) {
                 getSearchMovies(searchQuery)
             }
         }
+        props.actions.clearFilter()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -149,7 +151,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            setHomePage: bindActionCreators(navbarActions.setHomepage, dispatch)
+            setHomePage: bindActionCreators(navbarActions.setHomepage, dispatch),
+            clearFilter: bindActionCreators(filterbarActions.clearFilter, dispatch)
         }
     }
 }

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Container, Row } from 'reactstrap'
 import * as movieActions from '../../redux/actions/movieActions'
 import * as navbarActions from '../../redux/actions/navbarActions'
+import * as filterbarActions from '../../redux/actions/filterbarActions'
 import * as filterFunctions from '../../asset/FilterFunctions'
 import MovieList from '../molecules/MovieList'
 import FilterBar from '../molecules/FilterBar'
@@ -69,8 +70,7 @@ export function TopRatedMovies(props) {
         if (movies.length === 0) {
             props.actions.loadTopRatedMovies()
         }
-
-        filterMovies()
+        props.actions.clearFilter()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -122,7 +122,8 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: {
             loadTopRatedMovies: bindActionCreators(movieActions.loadTopRatedMovies, dispatch),
-            setHomePage: bindActionCreators(navbarActions.setHomepage, dispatch)
+            setHomePage: bindActionCreators(navbarActions.setHomepage, dispatch),
+            clearFilter: bindActionCreators(filterbarActions.clearFilter, dispatch)
         }
     }
 }
