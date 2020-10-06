@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { MdSearch } from "react-icons/md"
 import '../../css/InputSearch.css'
 import { useHistory } from 'react-router-dom'
+import { useAlert } from "react-alert"
 
 export default function InputSearch() {
+    const alert = useAlert()
     const history = useHistory()
     const [searchString, setSearchString] = useState('')
     const search = (e) => {
@@ -11,7 +13,7 @@ export default function InputSearch() {
         if (searchString.length > 0) {
             history.push('/search', {searchString: searchString})
         } else {
-            alert('Please input search key words')
+            alert.error("Please input search key words.", { title: "Missing keyword" })
         }
     }
 

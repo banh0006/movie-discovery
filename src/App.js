@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import './css/App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from './components/commons/NavBar'
+import Footer from './components/commons/Footer'
 import Home from './components/pages/Home'
 import MovieDetails from './components/pages/MovieDetails'
 import TopRatedMovies from './components/pages/TopRatedMovies'
@@ -10,6 +11,8 @@ import PopularMovies from './components/pages/PopularMovies'
 import SearchPage from './components/pages/SearchPage'
 import MoviesByGenre from './components/pages/MoviesByGenre'
 import MoviesByCountry from './components/pages/MoviesByCountry'
+import { positions, Provider } from "react-alert"
+import AlertTemplate from "react-alert-template-mui"
 
 // axios.defaults.baseURL = 'https://...'
 function App(props) {
@@ -18,6 +21,11 @@ function App(props) {
   const [scrolledPosition, setSrolledPosition] = useState(0)
   const [carouselHeight, setCarouselHeight] = useState(0)
 
+  const options = {
+    timeout: 4000,
+    position: positions.MIDDLE
+  }
+  
   const handleScroll = () => {
     if (!props.homepage) {
       setTransparentNav(false)
@@ -72,20 +80,23 @@ function App(props) {
   }, [props.homepage])
 
   return (
-    <Router basename="/movie-discovery">
-      <div className="App">
-        <Navbar showNav={showNav} isTransparent={transparentNav} />
-        <Switch>
-          <Route path="/popular" component={PopularMovies} />
-          <Route path="/toprated" component={TopRatedMovies} />
-          <Route path="/details/:id" component={MovieDetails} />
-          <Route path="/movies/genre/:name" component={MoviesByGenre} />
-          <Route path="/movies/country/:name" component={MoviesByCountry} />
-          <Route path='/search' component={SearchPage} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </div>
-    </Router>
+    <Provider template={AlertTemplate} {...options}>
+      <Router basename="/movie-discovery">
+        <div className="App">
+          <Navbar showNav={showNav} isTransparent={transparentNav} />
+          <Switch>
+            <Route path="/popular" component={PopularMovies} />
+            <Route path="/toprated" component={TopRatedMovies} />
+            <Route path="/details/:id" component={MovieDetails} />
+            <Route path="/movies/genre/:name" component={MoviesByGenre} />
+            <Route path="/movies/country/:name" component={MoviesByCountry} />
+            <Route path='/search' component={SearchPage} />
+            <Route path="/" component={Home} />
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    </Provider>
   )
 }
 

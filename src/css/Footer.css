@@ -1,0 +1,45 @@
+.footer-container {
+    background-color : #000;
+}
+
+.footer-wrapper {
+    margin-top: 2rem;
+    padding: 4rem 0;
+    justify-content: center;
+}
+
+.developed-by-col > :first-child, .tech-info-col > :first-child, 
+.contact-col > :first-child, .message-col > :first-child {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #6c757d;
+}
+
+.dev-name a {
+    color: #fff;
+}
+
+.dev-name a:hover {
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.tech-item {
+    margin-bottom: 0.5rem;
+}
+
+.icons a {
+    color: #fff;
+}
+
+.icons a:hover {
+    color: inherit;
+}
+
+.linkedin-icon, .github-icon, .gmail-icon {
+    height: 2em;
+    width: 2em;
+    margin-right: 0.5rem;
+}

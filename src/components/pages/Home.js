@@ -12,7 +12,7 @@ import '../../css/Home.css'
 export function Home(props) {
     const styles = {
         sectionContainer: {
-            'margin-top': '2rem'
+            'marginTop': '2rem'
         }
     }
 
