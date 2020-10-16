@@ -169,7 +169,7 @@ export function MovieDetails(props) {
             <Row className="trailer">
                 { trailer  && 
                     <Col sm="12" xs="11" md="12" lg="9" className="trailer-container">
-                        <iframe src={trailer.key ? YOUTUBE_VIDEO_URL + trailer.key : null}  title={movie.title}/>
+                        <iframe src={trailer.key ? YOUTUBE_VIDEO_URL + trailer.key : null}  title={movie.title} allowfullscreen="true" />
                     </Col>
                 }
             </Row>
